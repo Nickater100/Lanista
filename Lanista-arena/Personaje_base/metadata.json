@@ -253,6 +253,186 @@
           "animations/custom-backward dodge jump, quick lea/west/frame_007.png",
           "animations/custom-backward dodge jump, quick lea/west/frame_008.png"
         ]
+      },
+      "custom-death animation, character col": {
+        "south-east": [
+          "animations/custom-death animation, character col/south-east/frame_000.png",
+          "animations/custom-death animation, character col/south-east/frame_001.png",
+          "animations/custom-death animation, character col/south-east/frame_002.png",
+          "animations/custom-death animation, character col/south-east/frame_003.png",
+          "animations/custom-death animation, character col/south-east/frame_004.png",
+          "animations/custom-death animation, character col/south-east/frame_005.png",
+          "animations/custom-death animation, character col/south-east/frame_006.png",
+          "animations/custom-death animation, character col/south-east/frame_007.png",
+          "animations/custom-death animation, character col/south-east/frame_008.png"
+        ],
+        "east": [
+          "animations/custom-death animation, character col/east/frame_000.png",
+          "animations/custom-death animation, character col/east/frame_001.png",
+          "animations/custom-death animation, character col/east/frame_002.png",
+          "animations/custom-death animation, character col/east/frame_003.png",
+          "animations/custom-death animation, character col/east/frame_004.png",
+          "animations/custom-death animation, character col/east/frame_005.png",
+          "animations/custom-death animation, character col/east/frame_006.png",
+          "animations/custom-death animation, character col/east/frame_007.png",
+          "animations/custom-death animation, character col/east/frame_008.png"
+        ],
+        "west": [
+          "animations/custom-death animation, character col/west/frame_000.png",
+          "animations/custom-death animation, character col/west/frame_001.png",
+          "animations/custom-death animation, character col/west/frame_002.png",
+          "animations/custom-death animation, character col/west/frame_003.png",
+          "animations/custom-death animation, character col/west/frame_004.png",
+          "animations/custom-death animation, character col/west/frame_005.png",
+          "animations/custom-death animation, character col/west/frame_006.png",
+          "animations/custom-death animation, character col/west/frame_007.png",
+          "animations/custom-death animation, character col/west/frame_008.png"
+        ],
+        "south": [
+          "animations/custom-death animation, character col/south/frame_000.png",
+          "animations/custom-death animation, character col/south/frame_001.png",
+          "animations/custom-death animation, character col/south/frame_002.png",
+          "animations/custom-death animation, character col/south/frame_003.png",
+          "animations/custom-death animation, character col/south/frame_004.png",
+          "animations/custom-death animation, character col/south/frame_005.png",
+          "animations/custom-death animation, character col/south/frame_006.png",
+          "animations/custom-death animation, character col/south/frame_007.png",
+          "animations/custom-death animation, character col/south/frame_008.png"
+        ],
+        "south-west": [
+          "animations/custom-death animation, character col/south-west/frame_000.png",
+          "animations/custom-death animation, character col/south-west/frame_001.png",
+          "animations/custom-death animation, character col/south-west/frame_002.png",
+          "animations/custom-death animation, character col/south-west/frame_003.png",
+          "animations/custom-death animation, character col/south-west/frame_004.png",
+          "animations/custom-death animation, character col/south-west/frame_005.png",
+          "animations/custom-death animation, character col/south-west/frame_006.png",
+          "animations/custom-death animation, character col/south-west/frame_007.png",
+          "animations/custom-death animation, character col/south-west/frame_008.png"
+        ],
+        "north-west": [
+          "animations/custom-death animation, character col/north-west/frame_000.png",
+          "animations/custom-death animation, character col/north-west/frame_001.png",
+          "animations/custom-death animation, character col/north-west/frame_002.png",
+          "animations/custom-death animation, character col/north-west/frame_003.png",
+          "animations/custom-death animation, character col/north-west/frame_004.png",
+          "animations/custom-death animation, character col/north-west/frame_005.png",
+          "animations/custom-death animation, character col/north-west/frame_006.png",
+          "animations/custom-death animation, character col/north-west/frame_007.png",
+          "animations/custom-death animation, character col/north-west/frame_008.png"
+        ],
+        "north-east": [
+          "animations/custom-death animation, character col/north-east/frame_000.png",
+          "animations/custom-death animation, character col/north-east/frame_001.png",
+          "animations/custom-death animation, character col/north-east/frame_002.png",
+          "animations/custom-death animation, character col/north-east/frame_003.png",
+          "animations/custom-death animation, character col/north-east/frame_004.png",
+          "animations/custom-death animation, character col/north-east/frame_005.png",
+          "animations/custom-death animation, character col/north-east/frame_006.png",
+          "animations/custom-death animation, character col/north-east/frame_007.png",
+          "animations/custom-death animation, character col/north-east/frame_008.png"
+        ],
+        "north": [
+          "animations/custom-death animation, character col/north/frame_000.png",
+          "animations/custom-death animation, character col/north/frame_001.png",
+          "animations/custom-death animation, character col/north/frame_002.png",
+          "animations/custom-death animation, character col/north/frame_003.png",
+          "animations/custom-death animation, character col/north/frame_004.png",
+          "animations/custom-death animation, character col/north/frame_005.png",
+          "animations/custom-death animation, character col/north/frame_006.png",
+          "animations/custom-death animation, character col/north/frame_007.png",
+          "animations/custom-death animation, character col/north/frame_008.png"
+        ]
+      },
+      "custom-victory animation, celebrating": {
+        "north": [
+          "animations/custom-victory animation, celebrating/north/frame_000.png",
+          "animations/custom-victory animation, celebrating/north/frame_001.png",
+          "animations/custom-victory animation, celebrating/north/frame_002.png",
+          "animations/custom-victory animation, celebrating/north/frame_003.png",
+          "animations/custom-victory animation, celebrating/north/frame_004.png",
+          "animations/custom-victory animation, celebrating/north/frame_005.png",
+          "animations/custom-victory animation, celebrating/north/frame_006.png",
+          "animations/custom-victory animation, celebrating/north/frame_007.png",
+          "animations/custom-victory animation, celebrating/north/frame_008.png"
+        ],
+        "south-west": [
+          "animations/custom-victory animation, celebrating/south-west/frame_000.png",
+          "animations/custom-victory animation, celebrating/south-west/frame_001.png",
+          "animations/custom-victory animation, celebrating/south-west/frame_002.png",
+          "animations/custom-victory animation, celebrating/south-west/frame_003.png",
+          "animations/custom-victory animation, celebrating/south-west/frame_004.png",
+          "animations/custom-victory animation, celebrating/south-west/frame_005.png",
+          "animations/custom-victory animation, celebrating/south-west/frame_006.png",
+          "animations/custom-victory animation, celebrating/south-west/frame_007.png",
+          "animations/custom-victory animation, celebrating/south-west/frame_008.png"
+        ],
+        "north-west": [
+          "animations/custom-victory animation, celebrating/north-west/frame_000.png",
+          "animations/custom-victory animation, celebrating/north-west/frame_001.png",
+          "animations/custom-victory animation, celebrating/north-west/frame_002.png",
+          "animations/custom-victory animation, celebrating/north-west/frame_003.png",
+          "animations/custom-victory animation, celebrating/north-west/frame_004.png",
+          "animations/custom-victory animation, celebrating/north-west/frame_005.png",
+          "animations/custom-victory animation, celebrating/north-west/frame_006.png",
+          "animations/custom-victory animation, celebrating/north-west/frame_007.png",
+          "animations/custom-victory animation, celebrating/north-west/frame_008.png"
+        ],
+        "west": [
+          "animations/custom-victory animation, celebrating/west/frame_000.png",
+          "animations/custom-victory animation, celebrating/west/frame_001.png",
+          "animations/custom-victory animation, celebrating/west/frame_002.png",
+          "animations/custom-victory animation, celebrating/west/frame_003.png",
+          "animations/custom-victory animation, celebrating/west/frame_004.png",
+          "animations/custom-victory animation, celebrating/west/frame_005.png",
+          "animations/custom-victory animation, celebrating/west/frame_006.png",
+          "animations/custom-victory animation, celebrating/west/frame_007.png",
+          "animations/custom-victory animation, celebrating/west/frame_008.png"
+        ],
+        "south": [
+          "animations/custom-victory animation, celebrating/south/frame_000.png",
+          "animations/custom-victory animation, celebrating/south/frame_001.png",
+          "animations/custom-victory animation, celebrating/south/frame_002.png",
+          "animations/custom-victory animation, celebrating/south/frame_003.png",
+          "animations/custom-victory animation, celebrating/south/frame_004.png",
+          "animations/custom-victory animation, celebrating/south/frame_005.png",
+          "animations/custom-victory animation, celebrating/south/frame_006.png",
+          "animations/custom-victory animation, celebrating/south/frame_007.png",
+          "animations/custom-victory animation, celebrating/south/frame_008.png"
+        ],
+        "east": [
+          "animations/custom-victory animation, celebrating/east/frame_000.png",
+          "animations/custom-victory animation, celebrating/east/frame_001.png",
+          "animations/custom-victory animation, celebrating/east/frame_002.png",
+          "animations/custom-victory animation, celebrating/east/frame_003.png",
+          "animations/custom-victory animation, celebrating/east/frame_004.png",
+          "animations/custom-victory animation, celebrating/east/frame_005.png",
+          "animations/custom-victory animation, celebrating/east/frame_006.png",
+          "animations/custom-victory animation, celebrating/east/frame_007.png",
+          "animations/custom-victory animation, celebrating/east/frame_008.png"
+        ],
+        "south-east": [
+          "animations/custom-victory animation, celebrating/south-east/frame_000.png",
+          "animations/custom-victory animation, celebrating/south-east/frame_001.png",
+          "animations/custom-victory animation, celebrating/south-east/frame_002.png",
+          "animations/custom-victory animation, celebrating/south-east/frame_003.png",
+          "animations/custom-victory animation, celebrating/south-east/frame_004.png",
+          "animations/custom-victory animation, celebrating/south-east/frame_005.png",
+          "animations/custom-victory animation, celebrating/south-east/frame_006.png",
+          "animations/custom-victory animation, celebrating/south-east/frame_007.png",
+          "animations/custom-victory animation, celebrating/south-east/frame_008.png"
+        ],
+        "north-east": [
+          "animations/custom-victory animation, celebrating/north-east/frame_000.png",
+          "animations/custom-victory animation, celebrating/north-east/frame_001.png",
+          "animations/custom-victory animation, celebrating/north-east/frame_002.png",
+          "animations/custom-victory animation, celebrating/north-east/frame_003.png",
+          "animations/custom-victory animation, celebrating/north-east/frame_004.png",
+          "animations/custom-victory animation, celebrating/north-east/frame_005.png",
+          "animations/custom-victory animation, celebrating/north-east/frame_006.png",
+          "animations/custom-victory animation, celebrating/north-east/frame_007.png",
+          "animations/custom-victory animation, celebrating/north-east/frame_008.png"
+        ]
       }
     }
   },
@@ -1305,7 +1485,9 @@
       "running-4-frames_south-west": [],
       "running-4-frames_west": [],
       "running-4-frames_north": [],
-      "running-4-frames_south": [
+      "running-4-frames_south": [],
+      "running-4-frames_north-west": [],
+      "running-4-frames_east": [
         null,
         null,
         null,
@@ -1316,8 +1498,6 @@
         null,
         null
       ],
-      "running-4-frames_north-west": [],
-      "running-4-frames_east": [],
       "custom-fast sword slash, quick horizo_south-east": [
         null,
         null,
@@ -1354,32 +1534,10 @@
         null
       ],
       "custom-fast sword slash, quick horizo_south-west": [],
-      "custom-fast sword slash, quick horizo_west": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-fast sword slash, quick horizo_north": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
+      "custom-fast sword slash, quick horizo_west": [],
+      "custom-fast sword slash, quick horizo_north": [],
       "custom-backward dodge jump, quick lea_south-east": [],
-      "custom-backward dodge jump, quick lea_north": [],
-      "custom-backward dodge jump, quick lea_south-west": [],
-      "custom-backward dodge jump, quick lea_south": [
+      "custom-backward dodge jump, quick lea_north": [
         null,
         null,
         null,
@@ -1390,7 +1548,29 @@
         null,
         null
       ],
-      "custom-backward dodge jump, quick lea_north-east": [],
+      "custom-backward dodge jump, quick lea_south-west": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "custom-backward dodge jump, quick lea_south": [],
+      "custom-backward dodge jump, quick lea_north-east": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "custom-backward dodge jump, quick lea_east": [],
       "custom-backward dodge jump, quick lea_north-west": [
         null,
@@ -1403,7 +1583,93 @@
         null,
         null
       ],
-      "custom-backward dodge jump, quick lea_west": [
+      "custom-backward dodge jump, quick lea_west": [],
+      "custom-death animation, character col_south-east": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "custom-death animation, character col_east": [],
+      "custom-death animation, character col_west": [],
+      "custom-death animation, character col_south": [],
+      "custom-death animation, character col_south-west": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "custom-death animation, character col_north-west": [],
+      "custom-death animation, character col_north-east": [],
+      "custom-death animation, character col_north": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "custom-victory animation, celebrating_north": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "custom-victory animation, celebrating_south-west": [],
+      "custom-victory animation, celebrating_north-west": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "custom-victory animation, celebrating_west": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "custom-victory animation, celebrating_south": [],
+      "custom-victory animation, celebrating_east": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "custom-victory animation, celebrating_south-east": [],
+      "custom-victory animation, celebrating_north-east": [
         null,
         null,
         null,
@@ -1417,5 +1683,5 @@
     }
   },
   "export_version": "1.0",
-  "export_date": "2026-03-29T19:27:24.148730"
+  "export_date": "2026-03-29T21:21:54.062874"
 }

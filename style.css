@@ -7,7 +7,66 @@ body {
     background-color: #1a1a1a; /* Dark background for the arena */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
+    user-select: none;
 }
+
+#start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease-out;
+}
+
+#start-content {
+    text-align: center;
+}
+
+#start-content h1 {
+    font-size: 3rem;
+    color: #e67e22;
+    margin-bottom: 0px;
+}
+
+#start-content p {
+    font-size: 1.2rem;
+    color: #666;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+#start-btn {
+    background: #e67e22;
+    border: none;
+    padding: 15px 40px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 0.2rem;
+    transition: transform 0.2s, background 0.2s;
+}
+
+#start-btn:hover {
+    background: #d35400;
+    transform: scale(1.05);
+}
+
+#start-btn:active {
+    transform: scale(0.95);
+}
+
 
 #ui-container {
     position: absolute;

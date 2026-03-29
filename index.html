@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lanista Arena - Prototype</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=15">
 </head>
 <body>
-    <div id="ui-container">
+    <div id="start-overlay">
+        <div id="start-content">
+            <h1>LANISTA ARENA</h1>
+            <p>Gladiatorial Combat Simulator</p>
+            <button id="start-btn">ENTER THE ARENA</button>
+        </div>
+    </div>
+    
+    <div id="ui-container" style="display: none;">
         <h1>LANISTA ARENA</h1>
     </div>
     <div id="health-bars"></div>
@@ -23,6 +31,6 @@
     }
     </script>
 
-    <script type="module" src="src/main.js?v=6"></script>
+    <script type="module" src="src/main.js?v=32"></script>
 </body>
 </html>

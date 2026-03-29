@@ -1,6 +1,9 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js';
-import { SpriteEntity } from './SpriteEntity.js';
+import { AssetLoader } from './AssetLoader.js?v=32';
+import { SpriteEntity } from './SpriteEntity.js?v=32';
+import { AudioManager } from './AudioManager.js?v=32';
+
+console.log('Lanista Arena v32 - Booting...');
 
 class ArenaGame {
     constructor() {
@@ -32,12 +35,40 @@ class ArenaGame {
         this.scene.add(grid);
 
         this.assetLoader = new AssetLoader();
+        this.audioManager = new AudioManager(this.camera);
         this.entities = [];
         this.isRunning = false;
 
+        this.setupStartButton();
         this.init();
         
         window.addEventListener('resize', () => this.onResize());
+    }
+
+    setupStartButton() {
+        const btn = document.getElementById('start-btn');
+        const overlay = document.getElementById('start-overlay');
+        const ui = document.getElementById('ui-container');
+        
+        if (!btn) {
+            console.error('Start button NOT found!');
+            return;
+        }
+
+        btn.addEventListener('click', async () => {
+            console.log('ENTER THE ARENA clicked');
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                if (ui) ui.style.display = 'block';
+            }, 500);
+
+            // Set running first so logic starts immediately
+            this.isRunning = true;
+            
+            // Initialize audio (fails gracefully)
+            await this.audioManager.init();
+        });
     }
 
     async init() {
@@ -45,20 +76,20 @@ class ArenaGame {
         await this.assetLoader.preloadEssential();
         
         // Player
-        this.player = new SpriteEntity(this.assetLoader, this.scene);
+        this.player = new SpriteEntity(this.assetLoader, this.scene, this.audioManager);
         this.player.position.set(-25, 0, 0);
         this.player.setDirectionFromVector(new THREE.Vector3(1, 0, 0));
         this.entities.push(this.player);
         this.createHealthBar(this.player);
 
         // Enemy (AI)
-        this.enemy = new SpriteEntity(this.assetLoader, this.scene);
+        this.enemy = new SpriteEntity(this.assetLoader, this.scene, this.audioManager);
         this.enemy.position.set(25, 0, 0);
         this.enemy.setDirectionFromVector(new THREE.Vector3(-1, 0, 0));
         this.entities.push(this.enemy);
         this.createHealthBar(this.enemy);
 
-        this.isRunning = true;
+        // Start animation loop immediately, but logic won't run until isRunning is true
         this.animate();
     }
 
@@ -83,7 +114,7 @@ class ArenaGame {
 
     updateHealthBars() {
         this.entities.forEach(entity => {
-            if (entity.isDying) {
+            if (entity.isDying && entity.health <= 0 && entity.frameIndex > 4) {
                 entity.hpContainer.style.display = 'none';
                 return;
             }
@@ -117,20 +148,34 @@ class ArenaGame {
     }
 
     update(dt) {
+        // Updated: Always update health bars even if paused, 
+        // as long as entities are created
+        if (this.entities.length > 0) {
+            this.updateHealthBars();
+        }
+
         if (!this.isRunning) return;
 
         // Unified Combat AI for all entities
         this.entities.forEach(gladiator => {
+            gladiator.update(dt);
             if (gladiator.isDying) return;
             const opponent = this.entities.find(e => e !== gladiator);
             this.updateGladiatorAI(gladiator, opponent, dt);
-            gladiator.update(dt);
         });
 
         this.updateHealthBars();
     }
 
     updateGladiatorAI(gladiator, opponent, dt) {
+        if (gladiator.isDying || gladiator.state === 'VICTORY') return;
+        
+        // If opponent is dying and we are not already celebrating, start celebrating!
+        if (opponent.isDying && gladiator.state !== 'VICTORY') {
+            gladiator.celebrate();
+            return;
+        }
+
         const dist = gladiator.position.distanceTo(opponent.position);
         const dir = new THREE.Vector3().subVectors(opponent.position, gladiator.position).normalize();
         const attackRange = 5.0; 
@@ -161,14 +206,14 @@ class ArenaGame {
             gladiator.velocity.copy(dir);
             gladiator.setDirectionFromVector(dir);
 
-            if (opponent.state === 'ATTACKING' && Math.random() < 0.05) {
+            if (opponent.state === 'ATTACKING' && Math.random() < 0.01) {
                 gladiator.dodge();
             }
         } else {
             gladiator.velocity.set(0, 0, 0);
             gladiator.setDirectionFromVector(dir);
 
-            if (opponent.state === 'ATTACKING' && Math.random() < 0.15) {
+            if (opponent.state === 'ATTACKING' && Math.random() < 0.02) {
                 gladiator.dodge();
             } else if (gladiator.attackCooldown <= 0) {
                 gladiator.attack();

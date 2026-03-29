@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 
 export class SpriteEntity {
-    constructor(assetLoader, scene) {
+    constructor(assetLoader, scene, audioManager) {
         this.assetLoader = assetLoader;
         this.scene = scene;
+        this.audioManager = audioManager;
         this.metadata = assetLoader.metadata;
         
         // State
@@ -74,6 +75,14 @@ export class SpriteEntity {
                 animationKey = 'custom-backward dodge jump, quick lea';
                 isLooping = false;
                 break;
+            case 'DYING':
+                animationKey = 'custom-death animation, character col';
+                isLooping = false;
+                break;
+            case 'VICTORY':
+                animationKey = 'custom-victory animation, celebrating';
+                isLooping = true;
+                break;
             default:
                 // IDLE
                 animationKey = null;
@@ -87,6 +96,9 @@ export class SpriteEntity {
                 if (this.frameIndex >= frames.length) {
                     if (isLooping) {
                         this.frameIndex = 0;
+                    } else if (this.state === 'DYING') {
+                        // Stay on the last frame of death
+                        this.frameIndex = frames.length - 1;
                     } else {
                         // Return to IDLE after non-looping animation
                         this.state = 'IDLE';
@@ -113,6 +125,8 @@ export class SpriteEntity {
         } else {
             const animationKey = this.state === 'RUNNING' ? 'running-4-frames' :
                                  this.state === 'ATTACKING' ? 'custom-fast sword slash, quick horizo' :
+                                 this.state === 'DYING' ? 'custom-death animation, character col' :
+                                 this.state === 'VICTORY' ? 'custom-victory animation, celebrating' :
                                  'custom-backward dodge jump, quick lea';
             
             const dirFrames = animations[animationKey][this.direction];
@@ -143,6 +157,9 @@ export class SpriteEntity {
         const directions = ['south', 'south-east', 'east', 'north-east', 'north', 'north-west', 'west', 'south-west'];
         this.direction = directions[sector];
         
+        // Depth sorting offset based on world position
+        this.sprite.renderOrder = Math.floor((100 - this.position.z) * 10);
+
         if (this.state === 'IDLE') {
             this.updateTexture();
         }
@@ -155,6 +172,8 @@ export class SpriteEntity {
         this.frameTimer = 0;
         this.attackCooldown = 1.2; // Attack every 1.2s max
         this.hasDealtDamage = false;
+        
+        if (this.audioManager) this.audioManager.play('slash', 0.3);
     }
 
     dodge() {
@@ -165,12 +184,22 @@ export class SpriteEntity {
         this.dodgeCooldown = 2.0; // Dodge every 2s max
     }
 
+    celebrate() {
+        if (this.isDying) return;
+        this.state = 'VICTORY';
+        this.frameIndex = 0;
+        this.frameTimer = 0;
+        this.velocity.set(0, 0, 0);
+    }
+
     takeDamage(amount) {
         if (this.isDying) return;
         
         this.health -= amount;
         this.flashRed();
         
+        if (this.audioManager) this.audioManager.play('hit', 0.5);
+
         if (this.health <= 0) {
             this.health = 0;
             this.die();
@@ -188,21 +217,28 @@ export class SpriteEntity {
     }
 
     die() {
+        if (this.isDying) return;
         this.isDying = true;
-        this.state = 'IDLE'; // Stop all actions
+        this.state = 'DYING'; 
+        this.frameIndex = 0;
+        this.frameTimer = 0;
         this.velocity.set(0, 0, 0);
         
-        // Simple fade out
-        let opacity = 1.0;
-        const interval = setInterval(() => {
-            opacity -= 0.1;
-            this.sprite.material.opacity = opacity;
-            this.sprite.material.transparent = true;
-            if (opacity <= 0) {
-                clearInterval(interval);
-                this.destroy();
-            }
-        }, 50);
+        if (this.audioManager) this.audioManager.playVictory();
+
+        // Optional: fade out after a long delay
+        setTimeout(() => {
+            let opacity = 1.0;
+            const interval = setInterval(() => {
+                opacity -= 0.05;
+                this.sprite.material.opacity = opacity;
+                this.sprite.material.transparent = true;
+                if (opacity <= 0) {
+                    clearInterval(interval);
+                    this.destroy();
+                }
+            }, 50);
+        }, 5000); // 5 seconds of lying on the ground
     }
 
     destroy() {

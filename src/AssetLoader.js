@@ -60,6 +60,25 @@ export class AssetLoader {
             });
         }
 
+        // Load new Death and Victory frames
+        const death = this.metadata.frames.animations['custom-death animation, character col'];
+        if (death) {
+            for (const dir in death) {
+                death[dir].forEach(framePath => {
+                    framesToLoad.push(this.loadTexture(framePath));
+                });
+            }
+        }
+
+        const victory = this.metadata.frames.animations['custom-victory animation, celebrating'];
+        if (victory) {
+            for (const dir in victory) {
+                victory[dir].forEach(framePath => {
+                    framesToLoad.push(this.loadTexture(framePath));
+                });
+            }
+        }
+
         await Promise.all(framesToLoad);
         console.log(`Preloaded ${this.cache.size} textures.`);
     }
