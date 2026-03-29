@@ -22,6 +22,14 @@ export class SpriteEntity {
         this.velocity = new THREE.Vector3(0, 0, 0);
         this.speed = 5.0; // Faster for less wait time
         this.isFlipped = false;
+        
+        // Stats
+        this.maxHealth = 100;
+        this.health = 100;
+        this.strength = 15;
+        this.agility = 10; // % chance to auto-dodge
+        this.hasDealtDamage = false; // To prevent multi-hits in one swing
+        this.isDying = false;
 
         // Visuals
         this.sprite = new THREE.Sprite();
@@ -83,6 +91,7 @@ export class SpriteEntity {
                         // Return to IDLE after non-looping animation
                         this.state = 'IDLE';
                         this.frameIndex = 0;
+                        this.hasDealtDamage = false; // Reset for next attack
                     }
                 }
             }
@@ -140,19 +149,60 @@ export class SpriteEntity {
     }
 
     attack() {
-        if (this.state === 'ATTACKING' || this.state === 'DODGING' || this.attackCooldown > 0) return;
+        if (this.state === 'ATTACKING' || this.state === 'DODGING' || this.attackCooldown > 0 || this.isDying) return;
         this.state = 'ATTACKING';
         this.frameIndex = 0;
         this.frameTimer = 0;
         this.attackCooldown = 1.2; // Attack every 1.2s max
+        this.hasDealtDamage = false;
     }
 
     dodge() {
-        if (this.state === 'ATTACKING' || this.state === 'DODGING' || this.dodgeCooldown > 0) return;
+        if (this.state === 'ATTACKING' || this.state === 'DODGING' || this.dodgeCooldown > 0 || this.isDying) return;
         this.state = 'DODGING';
         this.frameIndex = 0;
         this.frameTimer = 0;
         this.dodgeCooldown = 2.0; // Dodge every 2s max
+    }
+
+    takeDamage(amount) {
+        if (this.isDying) return;
+        
+        this.health -= amount;
+        this.flashRed();
+        
+        if (this.health <= 0) {
+            this.health = 0;
+            this.die();
+        }
+    }
+
+    flashRed() {
+        const originalColor = this.sprite.material.color.clone();
+        this.sprite.material.color.set(0xff0000);
+        setTimeout(() => {
+            if (this.sprite.material) {
+                this.sprite.material.color.copy(originalColor);
+            }
+        }, 100);
+    }
+
+    die() {
+        this.isDying = true;
+        this.state = 'IDLE'; // Stop all actions
+        this.velocity.set(0, 0, 0);
+        
+        // Simple fade out
+        let opacity = 1.0;
+        const interval = setInterval(() => {
+            opacity -= 0.1;
+            this.sprite.material.opacity = opacity;
+            this.sprite.material.transparent = true;
+            if (opacity <= 0) {
+                clearInterval(interval);
+                this.destroy();
+            }
+        }, 50);
     }
 
     destroy() {

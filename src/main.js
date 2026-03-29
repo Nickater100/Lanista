@@ -49,15 +49,60 @@ class ArenaGame {
         this.player.position.set(-25, 0, 0);
         this.player.setDirectionFromVector(new THREE.Vector3(1, 0, 0));
         this.entities.push(this.player);
+        this.createHealthBar(this.player);
 
         // Enemy (AI)
         this.enemy = new SpriteEntity(this.assetLoader, this.scene);
         this.enemy.position.set(25, 0, 0);
         this.enemy.setDirectionFromVector(new THREE.Vector3(-1, 0, 0));
         this.entities.push(this.enemy);
+        this.createHealthBar(this.enemy);
 
         this.isRunning = true;
         this.animate();
+    }
+
+    createHealthBar(entity) {
+        const container = document.getElementById('health-bars');
+        if (!container) {
+            console.error('Health bars container not found!');
+            return;
+        }
+        const barWrap = document.createElement('div');
+        barWrap.className = 'hp-bar-container';
+        
+        const barFill = document.createElement('div');
+        barFill.className = 'hp-bar-fill';
+        
+        barWrap.appendChild(barFill);
+        container.appendChild(barWrap);
+        
+        entity.hpBar = barFill;
+        entity.hpContainer = barWrap;
+    }
+
+    updateHealthBars() {
+        this.entities.forEach(entity => {
+            if (entity.isDying) {
+                entity.hpContainer.style.display = 'none';
+                return;
+            }
+
+            // Project 3D position to 2D screen space
+            const vector = entity.position.clone();
+            vector.y += 4.5; // Positioning above the sprite's head
+            vector.project(this.camera);
+
+            const x = (vector.x * 0.5 + 0.5) * window.innerWidth;
+            const y = (-(vector.y * 0.5) + 0.5) * window.innerHeight;
+
+            entity.hpContainer.style.left = `${x}px`;
+            entity.hpContainer.style.top = `${y}px`;
+            
+            // Update fill width
+            const healthPct = (entity.health / entity.maxHealth) * 100;
+            entity.hpBar.style.width = `${healthPct}%`;
+        });
     }
 
     onResize() {
@@ -76,28 +121,42 @@ class ArenaGame {
 
         // Unified Combat AI for all entities
         this.entities.forEach(gladiator => {
+            if (gladiator.isDying) return;
             const opponent = this.entities.find(e => e !== gladiator);
             this.updateGladiatorAI(gladiator, opponent, dt);
             gladiator.update(dt);
         });
+
+        this.updateHealthBars();
     }
 
     updateGladiatorAI(gladiator, opponent, dt) {
-        if (gladiator.state === 'ATTACKING' || gladiator.state === 'DODGING') return;
-
         const dist = gladiator.position.distanceTo(opponent.position);
         const dir = new THREE.Vector3().subVectors(opponent.position, gladiator.position).normalize();
+        const attackRange = 5.0; 
+        const approachRange = 60.0;
 
-        const attackRange = 3.5; // Slightly larger for better visual match
-        const approachRange = 60.0; // Far enough for extreme starts
+        // Hit Detection Logic
+        if (gladiator.state === 'ATTACKING' && (gladiator.frameIndex === 4 || gladiator.frameIndex === 5)) {
+            if (!gladiator.hasDealtDamage && dist <= attackRange) {
+                if (opponent.state === 'DODGING') {
+                    console.log('DODGED!');
+                } else {
+                    const dmg = gladiator.strength + Math.floor(Math.random() * 5);
+                    opponent.takeDamage(dmg);
+                    console.log(`HIT! Damage: ${dmg}`);
+                }
+                gladiator.hasDealtDamage = true;
+            }
+        }
+
+        if (gladiator.state === 'ATTACKING' || gladiator.state === 'DODGING') return;
 
         if (dist > approachRange) {
-            // Target is far, approach
             gladiator.state = 'RUNNING';
             gladiator.velocity.copy(dir);
             gladiator.setDirectionFromVector(dir);
         } else if (dist <= approachRange && dist > attackRange) {
-            // In approach zone, keep moving or dodge if opponent is attacking
             gladiator.state = 'RUNNING';
             gladiator.velocity.copy(dir);
             gladiator.setDirectionFromVector(dir);
@@ -106,7 +165,6 @@ class ArenaGame {
                 gladiator.dodge();
             }
         } else {
-            // In combat range
             gladiator.velocity.set(0, 0, 0);
             gladiator.setDirectionFromVector(dir);
 
@@ -136,4 +194,6 @@ class ArenaGame {
     }
 }
 
-new ArenaGame();
+window.addEventListener('load', () => {
+    new ArenaGame();
+});
