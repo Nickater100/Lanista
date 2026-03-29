@@ -14,8 +14,8 @@ El jugador asume el rol de un Lanista (dueño de un Ludus) que debe gestionar su
 *   **Seguridad:** Contratación de guardias para evitar revueltas. El número de guardias debe ser proporcional al número de gladiadores y su nivel de rebeldía.
 
 ## 3. Fase de Combate (Arena)
-*   **Motor 3D:** Uso de `Three.js`.
-*   **Assets:** Modelos de Sketchfab y animaciones de Mixamo.
+*   **Motor:** Uso de `Three.js` (Modo 2.5D Sprite).
+*   **Assets:** Sprites de Pixel Art (56x56px), 8 direcciones y animaciones por frames.
 *   **Mecánica:** Combate por turnos o semi-tiempo real basado en stats.
 *   **Riesgo:** Si un gladiador pierde, existe un **60% de probabilidad de muerte permanente**.
 *   **Reputación:** Las victorias aumentan la reputación, permitiendo acceso a arenas "Premium" con mayores recompensas.
@@ -28,6 +28,6 @@ El jugador asume el rol de un Lanista (dueño de un Ludus) que debe gestionar su
 1.  **Setup del Proyecto:** Estructura básica de archivos (HTML, CSS, JS).
 2.  **Core de Gestión:** Implementación del estado global (Oro, Inventario de Gladiadores).
 3.  **UI de Menús:** Mercado, Ludus y Arena.
-4.  **Integración Three.js:** Visualización del combate y carga de modelos `.glb`/`.gltf`.
+4.  **Integración Three.js:** Visualización del combate usando Orthographic Camera y carga de sprites (`Personaje_base`).
 5.  **Sistema de Eventos:** Rebeldía y consecuencias aleatorias.
 6.  **Pulido:** Efectos visuales, sonidos y balanceo de economía.

@@ -4,8 +4,8 @@ This document provides a structured specification for an AI coder to implement t
 
 ## 1. Technical Stack
 - **Frontend:** HTML5, CSS3 (Modern/Premium UI), JavaScript (ES6+).
-- **3D Engine:** Three.js.
-- **Assets:** GLTF/GLB models (Humanoid), Mixamo animations (Idle, Attack, Hit, Death).
+- **Engine:** Three.js (2.5D Sprite Mode).
+- **Assets:** 56x56 Pixel Art sprites (8 directions), PNG animations.
 - **Monetization:** AdMob (Rewarded Video), In-App Purchase placeholders.
 
 ## 2. Core State Schema (JSON)
@@ -46,9 +46,9 @@ This document provides a structured specification for an AI coder to implement t
 - **Actions:** `rewardGladiator(id)` (-Gold, -Rebellion), `punishGladiator(id)` (-Rebellion, +ChanceOfInjury).
 
 ### C. Combat Engine (`Arena.js` using Three.js)
-- **Renderer:** Setup `WebGLRenderer`, `PerspectiveCamera`, `Scene`.
-- **Character Loader:** `GLTFLoader` for models.
-- **Animation Controller:** `AnimationMixer` to switch between Mixamo clips.
+- **Renderer:** Setup `WebGLRenderer`, `OrthographicCamera`, `Scene`.
+- **Sprite Manager:** Custom loader for `metadata.json` and frame sequences.
+- **Animation Controller:** Custom `SpriteManager.js` to switch between frame-based sequences.
 - **Combat Logic:** 
     - Deterministic or RNG based on stats.
     - Result calculation: `win` or `loss`.
@@ -60,14 +60,14 @@ This document provides a structured specification for an AI coder to implement t
 
 ## 4. UI/UX Requirements
 - **Dashboard:** Display Gold, Reputation, and Gladiator list.
-- **Arena View:** 3D canvas overlay with HUD (Health bars, Action buttons).
+- **Arena View:** 2.5D canvas overlay with HUD (Health bars, Action buttons). Fixed high top-down perspective.
 - **Transitions:** Smooth fade-in/out between scenes.
 
 ## 5. Implementation Steps (AI Priority)
 1. Initialize project structure.
 2. Implement `State` management (Redux-pattern or simple Object).
 3. Create Ludus/Market UI components.
-4. Integrate Three.js boilerplate with a placeholder cube (then replace with models).
+4. Integrate Three.js boilerplate with an Orthographic Camera and a placeholder Sprite.
 5. Implement Combat Logic (Stats vs Stats).
 6. Implement Rebellion/Loyalty loop.
 7. Add AdMob/IAP interface.
