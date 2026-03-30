@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js?v=38';
-import { SpriteEntity } from './SpriteEntity.js?v=38';
-import { AudioManager } from './AudioManager.js?v=38';
+import { AssetLoader } from './AssetLoader.js?v=40';
+import { SpriteEntity } from './SpriteEntity.js?v=40';
+import { AudioManager } from './AudioManager.js?v=40';
 
-console.log('Lanista Arena v38 - Booting...');
+console.log('Lanista Arena v40 - Booting (Procedural Assets)...');
 
 class ArenaGame {
     constructor() {
@@ -21,18 +21,100 @@ class ArenaGame {
 
         this.scene = new THREE.Scene();
         
-        // Arena Floor
-        const floorGeometry = new THREE.PlaneGeometry(100, 100);
-        const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x2c3e50 });
+        const textureLoader = new THREE.TextureLoader();
+        
+        // Procedural Texture Generators
+        const createSandTexture = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 512;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#dbb07b';
+            ctx.fillRect(0, 0, 512, 512);
+            for (let i = 0; i < 5000; i++) {
+                ctx.fillStyle = Math.random() > 0.5 ? '#d4a36a' : '#e4bc8c';
+                ctx.fillRect(Math.random() * 512, Math.random() * 512, 2, 2);
+            }
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(10, 10);
+            return tex;
+        };
+
+        const createStoneTexture = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 512;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#888888';
+            ctx.fillRect(0, 0, 512, 512);
+            ctx.strokeStyle = '#444444';
+            ctx.lineWidth = 4;
+            for (let y = 0; y < 512; y += 64) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(512, y);
+                ctx.stroke();
+                const offset = (y / 64) % 2 === 0 ? 0 : 64;
+                for (let x = 0; x < 512; x += 128) {
+                    ctx.beginPath();
+                    ctx.moveTo(x + offset, y);
+                    ctx.lineTo(x + offset, y + 64);
+                    ctx.stroke();
+                }
+            }
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(20, 1);
+            return tex;
+        };
+
+        // Arena Floor (Procedural Sand)
+        const sandTexture = createSandTexture();
+        
+        const floorGeometry = new THREE.CircleGeometry(50, 64);
+        const floorMaterial = new THREE.MeshStandardMaterial({ 
+            map: sandTexture,
+            color: 0xffffff, 
+            roughness: 0.9
+        });
         const floor = new THREE.Mesh(floorGeometry, floorMaterial);
         floor.rotation.x = -Math.PI / 2;
-        floor.position.y = -2.8; // Slightly below sprites
+        floor.position.y = -2.8;
+        floor.receiveShadow = true;
         this.scene.add(floor);
 
-        // Simple grid for sense of space
-        const grid = new THREE.GridHelper(100, 20, 0x444444, 0x333333);
-        grid.position.y = -2.7;
-        this.scene.add(grid);
+        // Coliseum Walls (Procedural Stone)
+        const stoneTexture = createStoneTexture();
+        
+        const wallGeometry = new THREE.CylinderGeometry(51, 51, 10, 64, 1, true); 
+        const wallMaterial = new THREE.MeshStandardMaterial({ 
+            map: stoneTexture,
+            side: THREE.BackSide, // Only visible from inside
+            color: 0xaaaaaa 
+        });
+        const walls = new THREE.Mesh(wallGeometry, wallMaterial);
+        walls.position.y = 2.2; 
+        this.scene.add(walls);
+
+        // Outer rim for thickness
+        const outerWallGeo = new THREE.CylinderGeometry(52, 52, 10, 64, 1, true);
+        const outerWallMat = new THREE.MeshStandardMaterial({ map: stoneTexture, side: THREE.FrontSide, color: 0x666666 });
+        const outerWaves = new THREE.Mesh(outerWallGeo, outerWallMat);
+        outerWaves.position.y = 2.2;
+        this.scene.add(outerWaves);
+
+        // Lighting System
+        const ambientLight = new THREE.AmbientLight(0xfff5e6, 0.7); 
+        this.scene.add(ambientLight);
+
+        const sunLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        sunLight.position.set(20, 50, 30);
+        sunLight.castShadow = true;
+        this.scene.add(sunLight);
+        
+        // Environment Fog
+        this.scene.fog = new THREE.Fog(0x1a1a1a, 60, 150);
 
         this.assetLoader = new AssetLoader();
         this.audioManager = new AudioManager(this.camera);
