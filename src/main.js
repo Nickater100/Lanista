@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js?v=40';
-import { SpriteEntity } from './SpriteEntity.js?v=40';
-import { AudioManager } from './AudioManager.js?v=40';
+import { AssetLoader } from './AssetLoader.js?v=48';
+import { SpriteEntity } from './SpriteEntity.js?v=48';
+import { AudioManager } from './AudioManager.js?v=48';
 
-console.log('Lanista Arena v40 - Booting (Procedural Assets)...');
+console.log('Lanista Arena v48 - Booting (Blood Splatter System)...');
 
 class ArenaGame {
     constructor() {
@@ -68,6 +68,27 @@ class ArenaGame {
             tex.repeat.set(20, 1);
             return tex;
         };
+
+        const createBloodTexture = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 128;
+            canvas.height = 128;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, 128, 128);
+            // Darker red for realism
+            ctx.fillStyle = '#8B0000'; 
+            for (let i = 0; i < 15; i++) {
+                const x = 64 + (Math.random() - 0.5) * 60;
+                const y = 64 + (Math.random() - 0.5) * 60;
+                const r = 2 + Math.random() * 20;
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            return new THREE.CanvasTexture(canvas);
+        };
+
+        this.bloodTextureBase = createBloodTexture();
 
         // Arena Floor (Procedural Sand)
         const sandTexture = createSandTexture();
@@ -249,6 +270,25 @@ class ArenaGame {
         this.updateHealthBars();
     }
 
+    spawnBlood(pos) {
+        const size = 2.0 + Math.random() * 3.0; // Randomized splatter sizes
+        const geo = new THREE.CircleGeometry(size, 8);
+        const mat = new THREE.MeshStandardMaterial({ 
+            map: this.bloodTextureBase, 
+            transparent: true, 
+            opacity: 0.8,
+            depthWrite: false, // Prevents artifacting with overlapping decals
+            roughness: 1.0, 
+            metalness: 0.0,
+            color: new THREE.Color(0.8 + Math.random() * 0.2, 1, 1) // Slight color variance
+        });
+        const blood = new THREE.Mesh(geo, mat);
+        blood.rotation.x = -Math.PI / 2;
+        blood.rotation.z = Math.random() * Math.PI * 2; // Random rotation for uniqueness
+        blood.position.set(pos.x + (Math.random() - 0.5) * 2, -2.75, pos.z + (Math.random() - 0.5) * 2);
+        this.scene.add(blood);
+    }
+
     updateGladiatorAI(gladiator, opponent, dt) {
         if (gladiator.isDying || gladiator.state === 'VICTORY') return;
         
@@ -271,6 +311,7 @@ class ArenaGame {
                 } else {
                     const dmg = gladiator.strength + Math.floor(Math.random() * 5);
                     opponent.takeDamage(dmg);
+                    this.spawnBlood(opponent.position);
                     console.log(`HIT! Damage: ${dmg}`);
                 }
                 gladiator.hasDealtDamage = true;
