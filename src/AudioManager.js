@@ -6,17 +6,17 @@ export class AudioManager {
         camera.add(this.listener);
 
         this.loader = new THREE.AudioLoader();
-        // Set crossOrigin if your sounds come from external CDNs
         this.loader.setCrossOrigin('anonymous');
         
         this.sounds = new Map();
         
-        // Audio Assets (Public CDNs)
+        // Audio Assets (User-provided in /sounds)
         this.assets = {
-            ambient: 'https://freesound.org/data/previews/173/173859_2437358-lq.mp3', // Crowd cheer loop 
-            slash: 'https://cdn.freesound.org/previews/118/118231_1762831-lq.mp3',    // Sword swing
-            hit: 'https://cdn.freesound.org/previews/235/235911_3518703-lq.mp3',      // Sword hit clang
-            victory: 'https://cdn.freesound.org/previews/277/277441_1203876-lq.mp3'  // Victory roar
+            ambient: './sounds/multitud.mp3', 
+            slash: './sounds/espada.mp3',    
+            hit: './sounds/espada.mp3',      
+            death: './sounds/muerte.mp3',
+            victory: './sounds/multitud.mp3'  
         };
 
         this.isInitialized = false;
@@ -62,46 +62,108 @@ export class AudioManager {
             sound.setVolume(volume);
             sound.play();
         } else {
-            // Fallback to synthetic sounds if assets failed to load
+            console.log(`Fallback: playing synthetic ${key}`);
             this.playSynthetic(key, volume);
         }
     }
 
     playSynthetic(type, volume = 0.5) {
-        // Simple Web Audio API synthesized sounds
         const context = this.listener.context;
-        const osc = context.createOscillator();
+        const oscillator = context.createOscillator();
         const gain = context.createGain();
-        
-        osc.connect(gain);
-        gain.connect(context.destination);
-        
         const now = context.currentTime;
         
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        
         if (type === 'slash') {
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(800, now);
-            osc.frequency.exponentialRampToValueAtTime(100, now + 0.1);
-            gain.gain.setValueAtTime(volume * 0.2, now);
-            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
-            osc.start(now);
-            osc.stop(now + 0.1);
-        } else if (type === 'hit') {
-            osc.type = 'square';
-            osc.frequency.setValueAtTime(1200, now);
-            osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+            // Metallic FM Synthesis: Modulator -> Carrier
+            const mod = context.createOscillator();
+            const modGain = context.createGain();
+            
+            oscillator.type = 'sawtooth';
+            oscillator.frequency.setValueAtTime(800, now);
+            oscillator.frequency.exponentialRampToValueAtTime(100, now + 0.15);
+            
+            mod.type = 'square';
+            mod.frequency.setValueAtTime(1200, now);
+            mod.connect(modGain);
+            modGain.connect(oscillator.frequency);
+            modGain.gain.setValueAtTime(400, now);
+            
             gain.gain.setValueAtTime(volume * 0.3, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+            
+            mod.start(now);
+            oscillator.start(now);
+            mod.stop(now + 0.15);
+            oscillator.stop(now + 0.15);
+        } else if (type === 'death') {
+            // Formant Synthesis for "Aarrgg" (Human pain grunt)
+            oscillator.type = 'sawtooth';
+            oscillator.frequency.setValueAtTime(120, now); 
+            oscillator.frequency.exponentialRampToValueAtTime(80, now + 0.5);
+            
+            // F1: First Formant (Vowel 'A' -> ~700Hz)
+            const f1 = context.createBiquadFilter();
+            f1.type = 'bandpass';
+            f1.frequency.setValueAtTime(700, now);
+            f1.Q.setValueAtTime(5, now);
+            
+            // F2: Second Formant (~1100Hz)
+            const f2 = context.createBiquadFilter();
+            f2.type = 'bandpass';
+            f2.frequency.setValueAtTime(1100, now);
+            f2.Q.setValueAtTime(5, now);
+            
+            oscillator.disconnect(gain);
+            oscillator.connect(f1);
+            oscillator.connect(f2);
+            f1.connect(gain);
+            f2.connect(gain);
+            
+            gain.gain.setValueAtTime(volume * 0.4, now);
+            gain.gain.linearRampToValueAtTime(volume * 0.5, now + 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+            
+            oscillator.start(now);
+            oscillator.stop(now + 0.5);
+        } else if (type === 'hit') {
+            // Impact with White Noise Crunch
+            const noiseBuffer = context.createBuffer(1, context.sampleRate * 0.05, context.sampleRate);
+            const output = noiseBuffer.getChannelData(0);
+            for (let i = 0; i < context.sampleRate * 0.05; i++) output[i] = Math.random() * 2 - 1;
+            
+            const noise = context.createBufferSource();
+            noise.buffer = noiseBuffer;
+            
+            const noiseFilter = context.createBiquadFilter();
+            noiseFilter.type = 'lowpass';
+            noiseFilter.frequency.setValueAtTime(1000, now);
+            
+            oscillator.type = 'square';
+            oscillator.frequency.setValueAtTime(200, now);
+            oscillator.frequency.exponentialRampToValueAtTime(40, now + 0.05);
+            
+            noise.connect(noiseFilter);
+            noiseFilter.connect(gain);
+            oscillator.connect(gain);
+            
+            gain.gain.setValueAtTime(volume * 0.5, now);
             gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
-            osc.start(now);
-            osc.stop(now + 0.05);
+            
+            noise.start(now);
+            oscillator.start(now);
+            noise.stop(now + 0.05);
+            oscillator.stop(now + 0.05);
         } else if (type === 'victory') {
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(400, now);
-            osc.frequency.exponentialRampToValueAtTime(800, now + 0.5);
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(400, now);
+            oscillator.frequency.exponentialRampToValueAtTime(800, now + 0.5);
             gain.gain.setValueAtTime(volume * 0.2, now);
             gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
-            osc.start(now);
-            osc.stop(now + 0.5);
+            oscillator.start(now);
+            oscillator.stop(now + 0.5);
         }
     }
 

@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js?v=32';
-import { SpriteEntity } from './SpriteEntity.js?v=32';
-import { AudioManager } from './AudioManager.js?v=32';
+import { AssetLoader } from './AssetLoader.js?v=38';
+import { SpriteEntity } from './SpriteEntity.js?v=38';
+import { AudioManager } from './AudioManager.js?v=38';
 
-console.log('Lanista Arena v32 - Booting...');
+console.log('Lanista Arena v38 - Booting...');
 
 class ArenaGame {
     constructor() {

@@ -224,7 +224,10 @@ export class SpriteEntity {
         this.frameTimer = 0;
         this.velocity.set(0, 0, 0);
         
-        if (this.audioManager) this.audioManager.playVictory();
+        if (this.audioManager) {
+            this.audioManager.play('death', 0.6);
+            this.audioManager.playVictory();
+        }
 
         // Optional: fade out after a long delay
         setTimeout(() => {
