@@ -1,11 +1,13 @@
 import * as THREE from 'three';
 
 export class SpriteEntity {
-    constructor(assetLoader, scene, audioManager) {
+    constructor(assetLoader, scene, audioManager, name = 'Gladiator', teamId = 0) {
         this.assetLoader = assetLoader;
         this.scene = scene;
         this.audioManager = audioManager;
         this.metadata = assetLoader.metadata;
+        this.name = name;
+        this.teamId = teamId;
         
         // State
         this.state = 'IDLE'; // IDLE, RUNNING, ATTACKING, DODGING
@@ -33,12 +35,18 @@ export class SpriteEntity {
         this.isDying = false;
 
         // Visuals
-        this.sprite = new THREE.Sprite();
+        this.sprite = new THREE.Sprite(new THREE.SpriteMaterial({ 
+            transparent: true, 
+            alphaTest: 0.5,
+            depthWrite: false
+        }));
         // Base size is 56x56, we'll scale it to reasonable world units.
         this.sprite.scale.set(5.6, 5.6, 1); 
         this.scene.add(this.sprite);
 
         this.updateTexture();
+        this.hpBar = null;
+        this.hpContainer = null;
     }
 
     update(dt) {
@@ -49,6 +57,9 @@ export class SpriteEntity {
         // Simple Physics
         this.position.addScaledVector(this.velocity, dt * this.speed);
         this.sprite.position.copy(this.position);
+        
+        // Depth sorting every frame based on position
+        this.sprite.renderOrder = Math.floor((100 - this.position.z) * 10);
         
         // Animation Loop
         this.frameTimer += dt;
@@ -141,6 +152,8 @@ export class SpriteEntity {
         const texture = this.assetLoader.getTexture(texturePath);
         if (texture) {
             this.sprite.material.map = texture;
+            this.sprite.material.alphaTest = 0.5;
+            this.sprite.material.depthWrite = false;
             this.sprite.material.needsUpdate = true;
         }
     }
@@ -157,9 +170,6 @@ export class SpriteEntity {
         const directions = ['south', 'south-east', 'east', 'north-east', 'north', 'north-west', 'west', 'south-west'];
         this.direction = directions[sector];
         
-        // Depth sorting offset based on world position
-        this.sprite.renderOrder = Math.floor((100 - this.position.z) * 10);
-
         if (this.state === 'IDLE') {
             this.updateTexture();
         }

@@ -46,25 +46,66 @@ body {
     margin-bottom: 40px;
 }
 
-#start-btn {
+#start-btn, .mode-btn {
     background: #e67e22;
     border: none;
-    padding: 15px 40px;
+    padding: 15px 30px;
     color: #fff;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     cursor: pointer;
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.1rem;
     transition: transform 0.2s, background 0.2s;
+    margin: 5px;
+    width: 200px;
 }
 
-#start-btn:hover {
+#start-btn:hover, .mode-btn:hover {
     background: #d35400;
     transform: scale(1.05);
 }
 
-#start-btn:active {
+#start-btn:active, .mode-btn:active {
     transform: scale(0.95);
+}
+
+.mode-selector, .setup-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+}
+
+.setup-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.setup-row label {
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.setup-row input {
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 5px 10px;
+    width: 60px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 4px;
 }
 
 
@@ -97,11 +138,12 @@ h1 {
 
 .hp-bar-container {
     position: absolute;
-    width: 60px;
+    width: 80px;
     height: 6px;
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid #000;
     transform: translate(-50%, -100%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .hp-bar-fill {
@@ -110,6 +152,35 @@ h1 {
     background: #e74c3c;
     transition: width 0.2s ease-out;
 }
+
+.gladiator-name {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.team-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.5);
+    display: inline-block;
+    box-shadow: 0 0 4px rgba(255,255,255,0.3);
+}
+
+/* Team Colors */
+.team-1 { background-color: #ff3c3c; box-shadow: 0 0 6px rgba(255, 60, 60, 0.8); }
+.team-2 { background-color: #3ca0ff; box-shadow: 0 0 6px rgba(60, 160, 255, 0.8); }
+.team-ffa { background-color: #ffd700; box-shadow: 0 0 6px rgba(255, 215, 0, 0.8); }
 
 canvas {
     display: block;
