@@ -434,213 +434,6 @@
           "animations/custom-victory animation, celebrating/north-east/frame_008.png"
         ]
       },
-      "custom-pixel art human base body, mal": {
-        "south-west": [
-          "animations/custom-pixel art human base body, mal/south-west/frame_000.png",
-          "animations/custom-pixel art human base body, mal/south-west/frame_001.png",
-          "animations/custom-pixel art human base body, mal/south-west/frame_002.png",
-          "animations/custom-pixel art human base body, mal/south-west/frame_003.png",
-          "animations/custom-pixel art human base body, mal/south-west/frame_004.png",
-          "animations/custom-pixel art human base body, mal/south-west/frame_005.png",
-          "animations/custom-pixel art human base body, mal/south-west/frame_006.png",
-          "animations/custom-pixel art human base body, mal/south-west/frame_007.png",
-          "animations/custom-pixel art human base body, mal/south-west/frame_008.png"
-        ],
-        "south": [
-          "animations/custom-pixel art human base body, mal/south/frame_000.png",
-          "animations/custom-pixel art human base body, mal/south/frame_001.png",
-          "animations/custom-pixel art human base body, mal/south/frame_002.png",
-          "animations/custom-pixel art human base body, mal/south/frame_003.png",
-          "animations/custom-pixel art human base body, mal/south/frame_004.png",
-          "animations/custom-pixel art human base body, mal/south/frame_005.png",
-          "animations/custom-pixel art human base body, mal/south/frame_006.png",
-          "animations/custom-pixel art human base body, mal/south/frame_007.png",
-          "animations/custom-pixel art human base body, mal/south/frame_008.png",
-          "animations/custom-pixel art human base body, mal/south/frame_000.png",
-          "animations/custom-pixel art human base body, mal/south/frame_001.png",
-          "animations/custom-pixel art human base body, mal/south/frame_002.png",
-          "animations/custom-pixel art human base body, mal/south/frame_003.png",
-          "animations/custom-pixel art human base body, mal/south/frame_004.png",
-          "animations/custom-pixel art human base body, mal/south/frame_005.png",
-          "animations/custom-pixel art human base body, mal/south/frame_006.png",
-          "animations/custom-pixel art human base body, mal/south/frame_007.png",
-          "animations/custom-pixel art human base body, mal/south/frame_008.png",
-          "animations/custom-pixel art human base body, mal/south/frame_000.png",
-          "animations/custom-pixel art human base body, mal/south/frame_001.png",
-          "animations/custom-pixel art human base body, mal/south/frame_002.png",
-          "animations/custom-pixel art human base body, mal/south/frame_003.png",
-          "animations/custom-pixel art human base body, mal/south/frame_004.png",
-          "animations/custom-pixel art human base body, mal/south/frame_005.png",
-          "animations/custom-pixel art human base body, mal/south/frame_006.png",
-          "animations/custom-pixel art human base body, mal/south/frame_007.png",
-          "animations/custom-pixel art human base body, mal/south/frame_008.png",
-          "animations/custom-pixel art human base body, mal/south/frame_000.png",
-          "animations/custom-pixel art human base body, mal/south/frame_001.png",
-          "animations/custom-pixel art human base body, mal/south/frame_002.png",
-          "animations/custom-pixel art human base body, mal/south/frame_003.png",
-          "animations/custom-pixel art human base body, mal/south/frame_004.png",
-          "animations/custom-pixel art human base body, mal/south/frame_005.png",
-          "animations/custom-pixel art human base body, mal/south/frame_006.png",
-          "animations/custom-pixel art human base body, mal/south/frame_007.png",
-          "animations/custom-pixel art human base body, mal/south/frame_008.png"
-        ],
-        "south-east": [
-          "animations/custom-pixel art human base body, mal/south-east/frame_000.png",
-          "animations/custom-pixel art human base body, mal/south-east/frame_001.png",
-          "animations/custom-pixel art human base body, mal/south-east/frame_002.png",
-          "animations/custom-pixel art human base body, mal/south-east/frame_003.png",
-          "animations/custom-pixel art human base body, mal/south-east/frame_004.png",
-          "animations/custom-pixel art human base body, mal/south-east/frame_005.png",
-          "animations/custom-pixel art human base body, mal/south-east/frame_006.png",
-          "animations/custom-pixel art human base body, mal/south-east/frame_007.png",
-          "animations/custom-pixel art human base body, mal/south-east/frame_008.png"
-        ],
-        "north-west": [
-          "animations/custom-pixel art human base body, mal/north-west/frame_000.png",
-          "animations/custom-pixel art human base body, mal/north-west/frame_001.png",
-          "animations/custom-pixel art human base body, mal/north-west/frame_002.png",
-          "animations/custom-pixel art human base body, mal/north-west/frame_003.png",
-          "animations/custom-pixel art human base body, mal/north-west/frame_004.png",
-          "animations/custom-pixel art human base body, mal/north-west/frame_005.png",
-          "animations/custom-pixel art human base body, mal/north-west/frame_006.png",
-          "animations/custom-pixel art human base body, mal/north-west/frame_007.png",
-          "animations/custom-pixel art human base body, mal/north-west/frame_008.png"
-        ],
-        "west": [
-          "animations/custom-pixel art human base body, mal/west/frame_000.png",
-          "animations/custom-pixel art human base body, mal/west/frame_001.png",
-          "animations/custom-pixel art human base body, mal/west/frame_002.png",
-          "animations/custom-pixel art human base body, mal/west/frame_003.png",
-          "animations/custom-pixel art human base body, mal/west/frame_004.png",
-          "animations/custom-pixel art human base body, mal/west/frame_005.png",
-          "animations/custom-pixel art human base body, mal/west/frame_006.png",
-          "animations/custom-pixel art human base body, mal/west/frame_007.png",
-          "animations/custom-pixel art human base body, mal/west/frame_008.png"
-        ],
-        "north-east": [
-          "animations/custom-pixel art human base body, mal/north-east/frame_000.png",
-          "animations/custom-pixel art human base body, mal/north-east/frame_001.png",
-          "animations/custom-pixel art human base body, mal/north-east/frame_002.png",
-          "animations/custom-pixel art human base body, mal/north-east/frame_003.png",
-          "animations/custom-pixel art human base body, mal/north-east/frame_004.png",
-          "animations/custom-pixel art human base body, mal/north-east/frame_005.png",
-          "animations/custom-pixel art human base body, mal/north-east/frame_006.png",
-          "animations/custom-pixel art human base body, mal/north-east/frame_007.png",
-          "animations/custom-pixel art human base body, mal/north-east/frame_008.png"
-        ],
-        "east": [
-          "animations/custom-pixel art human base body, mal/east/frame_000.png",
-          "animations/custom-pixel art human base body, mal/east/frame_001.png",
-          "animations/custom-pixel art human base body, mal/east/frame_002.png",
-          "animations/custom-pixel art human base body, mal/east/frame_003.png",
-          "animations/custom-pixel art human base body, mal/east/frame_004.png",
-          "animations/custom-pixel art human base body, mal/east/frame_005.png",
-          "animations/custom-pixel art human base body, mal/east/frame_006.png",
-          "animations/custom-pixel art human base body, mal/east/frame_007.png",
-          "animations/custom-pixel art human base body, mal/east/frame_008.png"
-        ],
-        "north": [
-          "animations/custom-pixel art human base body, mal/north/frame_000.png",
-          "animations/custom-pixel art human base body, mal/north/frame_001.png",
-          "animations/custom-pixel art human base body, mal/north/frame_002.png",
-          "animations/custom-pixel art human base body, mal/north/frame_003.png",
-          "animations/custom-pixel art human base body, mal/north/frame_004.png",
-          "animations/custom-pixel art human base body, mal/north/frame_005.png",
-          "animations/custom-pixel art human base body, mal/north/frame_006.png",
-          "animations/custom-pixel art human base body, mal/north/frame_007.png",
-          "animations/custom-pixel art human base body, mal/north/frame_008.png"
-        ]
-      },
-      "custom-The character executes a sharp": {
-        "west": [
-          "animations/custom-The character executes a sharp/west/frame_000.png",
-          "animations/custom-The character executes a sharp/west/frame_001.png",
-          "animations/custom-The character executes a sharp/west/frame_002.png",
-          "animations/custom-The character executes a sharp/west/frame_003.png",
-          "animations/custom-The character executes a sharp/west/frame_004.png",
-          "animations/custom-The character executes a sharp/west/frame_005.png",
-          "animations/custom-The character executes a sharp/west/frame_006.png",
-          "animations/custom-The character executes a sharp/west/frame_007.png",
-          "animations/custom-The character executes a sharp/west/frame_008.png"
-        ],
-        "north-west": [
-          "animations/custom-The character executes a sharp/north-west/frame_000.png",
-          "animations/custom-The character executes a sharp/north-west/frame_001.png",
-          "animations/custom-The character executes a sharp/north-west/frame_002.png",
-          "animations/custom-The character executes a sharp/north-west/frame_003.png",
-          "animations/custom-The character executes a sharp/north-west/frame_004.png",
-          "animations/custom-The character executes a sharp/north-west/frame_005.png",
-          "animations/custom-The character executes a sharp/north-west/frame_006.png",
-          "animations/custom-The character executes a sharp/north-west/frame_007.png",
-          "animations/custom-The character executes a sharp/north-west/frame_008.png"
-        ],
-        "south-west": [
-          "animations/custom-The character executes a sharp/south-west/frame_000.png",
-          "animations/custom-The character executes a sharp/south-west/frame_001.png",
-          "animations/custom-The character executes a sharp/south-west/frame_002.png",
-          "animations/custom-The character executes a sharp/south-west/frame_003.png",
-          "animations/custom-The character executes a sharp/south-west/frame_004.png",
-          "animations/custom-The character executes a sharp/south-west/frame_005.png",
-          "animations/custom-The character executes a sharp/south-west/frame_006.png",
-          "animations/custom-The character executes a sharp/south-west/frame_007.png",
-          "animations/custom-The character executes a sharp/south-west/frame_008.png"
-        ],
-        "south": [
-          "animations/custom-The character executes a sharp/south/frame_000.png",
-          "animations/custom-The character executes a sharp/south/frame_001.png",
-          "animations/custom-The character executes a sharp/south/frame_002.png",
-          "animations/custom-The character executes a sharp/south/frame_003.png",
-          "animations/custom-The character executes a sharp/south/frame_004.png",
-          "animations/custom-The character executes a sharp/south/frame_005.png",
-          "animations/custom-The character executes a sharp/south/frame_006.png",
-          "animations/custom-The character executes a sharp/south/frame_007.png",
-          "animations/custom-The character executes a sharp/south/frame_008.png"
-        ],
-        "south-east": [
-          "animations/custom-The character executes a sharp/south-east/frame_000.png",
-          "animations/custom-The character executes a sharp/south-east/frame_001.png",
-          "animations/custom-The character executes a sharp/south-east/frame_002.png",
-          "animations/custom-The character executes a sharp/south-east/frame_003.png",
-          "animations/custom-The character executes a sharp/south-east/frame_004.png",
-          "animations/custom-The character executes a sharp/south-east/frame_005.png",
-          "animations/custom-The character executes a sharp/south-east/frame_006.png",
-          "animations/custom-The character executes a sharp/south-east/frame_007.png",
-          "animations/custom-The character executes a sharp/south-east/frame_008.png"
-        ],
-        "north": [
-          "animations/custom-The character executes a sharp/north/frame_000.png",
-          "animations/custom-The character executes a sharp/north/frame_001.png",
-          "animations/custom-The character executes a sharp/north/frame_002.png",
-          "animations/custom-The character executes a sharp/north/frame_003.png",
-          "animations/custom-The character executes a sharp/north/frame_004.png",
-          "animations/custom-The character executes a sharp/north/frame_005.png",
-          "animations/custom-The character executes a sharp/north/frame_006.png",
-          "animations/custom-The character executes a sharp/north/frame_007.png",
-          "animations/custom-The character executes a sharp/north/frame_008.png"
-        ],
-        "east": [
-          "animations/custom-The character executes a sharp/east/frame_000.png",
-          "animations/custom-The character executes a sharp/east/frame_001.png",
-          "animations/custom-The character executes a sharp/east/frame_002.png",
-          "animations/custom-The character executes a sharp/east/frame_003.png",
-          "animations/custom-The character executes a sharp/east/frame_004.png",
-          "animations/custom-The character executes a sharp/east/frame_005.png",
-          "animations/custom-The character executes a sharp/east/frame_006.png",
-          "animations/custom-The character executes a sharp/east/frame_007.png",
-          "animations/custom-The character executes a sharp/east/frame_008.png"
-        ],
-        "north-east": [
-          "animations/custom-The character executes a sharp/north-east/frame_000.png",
-          "animations/custom-The character executes a sharp/north-east/frame_001.png",
-          "animations/custom-The character executes a sharp/north-east/frame_002.png",
-          "animations/custom-The character executes a sharp/north-east/frame_003.png",
-          "animations/custom-The character executes a sharp/north-east/frame_004.png",
-          "animations/custom-The character executes a sharp/north-east/frame_005.png",
-          "animations/custom-The character executes a sharp/north-east/frame_006.png",
-          "animations/custom-The character executes a sharp/north-east/frame_007.png",
-          "animations/custom-The character executes a sharp/north-east/frame_008.png"
-        ]
-      },
       "custom-The character shifts from a ne": {
         "west": [
           "animations/custom-The character shifts from a ne/west/frame_000.png",
@@ -729,96 +522,6 @@
           "animations/custom-The character shifts from a ne/north-east/frame_006.png",
           "animations/custom-The character shifts from a ne/north-east/frame_007.png",
           "animations/custom-The character shifts from a ne/north-east/frame_008.png"
-        ]
-      },
-      "custom-The character performs a swift": {
-        "north": [
-          "animations/custom-The character performs a swift/north/frame_000.png",
-          "animations/custom-The character performs a swift/north/frame_001.png",
-          "animations/custom-The character performs a swift/north/frame_002.png",
-          "animations/custom-The character performs a swift/north/frame_003.png",
-          "animations/custom-The character performs a swift/north/frame_004.png",
-          "animations/custom-The character performs a swift/north/frame_005.png",
-          "animations/custom-The character performs a swift/north/frame_006.png",
-          "animations/custom-The character performs a swift/north/frame_007.png",
-          "animations/custom-The character performs a swift/north/frame_008.png"
-        ],
-        "east": [
-          "animations/custom-The character performs a swift/east/frame_000.png",
-          "animations/custom-The character performs a swift/east/frame_001.png",
-          "animations/custom-The character performs a swift/east/frame_002.png",
-          "animations/custom-The character performs a swift/east/frame_003.png",
-          "animations/custom-The character performs a swift/east/frame_004.png",
-          "animations/custom-The character performs a swift/east/frame_005.png",
-          "animations/custom-The character performs a swift/east/frame_006.png",
-          "animations/custom-The character performs a swift/east/frame_007.png",
-          "animations/custom-The character performs a swift/east/frame_008.png"
-        ],
-        "south-east": [
-          "animations/custom-The character performs a swift/south-east/frame_000.png",
-          "animations/custom-The character performs a swift/south-east/frame_001.png",
-          "animations/custom-The character performs a swift/south-east/frame_002.png",
-          "animations/custom-The character performs a swift/south-east/frame_003.png",
-          "animations/custom-The character performs a swift/south-east/frame_004.png",
-          "animations/custom-The character performs a swift/south-east/frame_005.png",
-          "animations/custom-The character performs a swift/south-east/frame_006.png",
-          "animations/custom-The character performs a swift/south-east/frame_007.png",
-          "animations/custom-The character performs a swift/south-east/frame_008.png"
-        ],
-        "south": [
-          "animations/custom-The character performs a swift/south/frame_000.png",
-          "animations/custom-The character performs a swift/south/frame_001.png",
-          "animations/custom-The character performs a swift/south/frame_002.png",
-          "animations/custom-The character performs a swift/south/frame_003.png",
-          "animations/custom-The character performs a swift/south/frame_004.png",
-          "animations/custom-The character performs a swift/south/frame_005.png",
-          "animations/custom-The character performs a swift/south/frame_006.png",
-          "animations/custom-The character performs a swift/south/frame_007.png",
-          "animations/custom-The character performs a swift/south/frame_008.png"
-        ],
-        "north-west": [
-          "animations/custom-The character performs a swift/north-west/frame_000.png",
-          "animations/custom-The character performs a swift/north-west/frame_001.png",
-          "animations/custom-The character performs a swift/north-west/frame_002.png",
-          "animations/custom-The character performs a swift/north-west/frame_003.png",
-          "animations/custom-The character performs a swift/north-west/frame_004.png",
-          "animations/custom-The character performs a swift/north-west/frame_005.png",
-          "animations/custom-The character performs a swift/north-west/frame_006.png",
-          "animations/custom-The character performs a swift/north-west/frame_007.png",
-          "animations/custom-The character performs a swift/north-west/frame_008.png"
-        ],
-        "west": [
-          "animations/custom-The character performs a swift/west/frame_000.png",
-          "animations/custom-The character performs a swift/west/frame_001.png",
-          "animations/custom-The character performs a swift/west/frame_002.png",
-          "animations/custom-The character performs a swift/west/frame_003.png",
-          "animations/custom-The character performs a swift/west/frame_004.png",
-          "animations/custom-The character performs a swift/west/frame_005.png",
-          "animations/custom-The character performs a swift/west/frame_006.png",
-          "animations/custom-The character performs a swift/west/frame_007.png",
-          "animations/custom-The character performs a swift/west/frame_008.png"
-        ],
-        "south-west": [
-          "animations/custom-The character performs a swift/south-west/frame_000.png",
-          "animations/custom-The character performs a swift/south-west/frame_001.png",
-          "animations/custom-The character performs a swift/south-west/frame_002.png",
-          "animations/custom-The character performs a swift/south-west/frame_003.png",
-          "animations/custom-The character performs a swift/south-west/frame_004.png",
-          "animations/custom-The character performs a swift/south-west/frame_005.png",
-          "animations/custom-The character performs a swift/south-west/frame_006.png",
-          "animations/custom-The character performs a swift/south-west/frame_007.png",
-          "animations/custom-The character performs a swift/south-west/frame_008.png"
-        ],
-        "north-east": [
-          "animations/custom-The character performs a swift/north-east/frame_000.png",
-          "animations/custom-The character performs a swift/north-east/frame_001.png",
-          "animations/custom-The character performs a swift/north-east/frame_002.png",
-          "animations/custom-The character performs a swift/north-east/frame_003.png",
-          "animations/custom-The character performs a swift/north-east/frame_004.png",
-          "animations/custom-The character performs a swift/north-east/frame_005.png",
-          "animations/custom-The character performs a swift/north-east/frame_006.png",
-          "animations/custom-The character performs a swift/north-east/frame_007.png",
-          "animations/custom-The character performs a swift/north-east/frame_008.png"
         ]
       },
       "custom-heavy sword swing, slow powerf": {
@@ -1962,8 +1665,7 @@
       "running-4-frames_south-west": [],
       "running-4-frames_west": [],
       "running-4-frames_north": [],
-      "running-4-frames_south": [],
-      "running-4-frames_north-west": [
+      "running-4-frames_south": [
         null,
         null,
         null,
@@ -1974,6 +1676,7 @@
         null,
         null
       ],
+      "running-4-frames_north-west": [],
       "running-4-frames_east": [],
       "custom-fast sword slash, quick horizo_south-east": [
         null,
@@ -2022,10 +1725,21 @@
         null,
         null
       ],
-      "custom-fast sword slash, quick horizo_north": [],
+      "custom-fast sword slash, quick horizo_north": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "custom-backward dodge jump, quick lea_south-east": [],
       "custom-backward dodge jump, quick lea_north": [],
-      "custom-backward dodge jump, quick lea_south-west": [
+      "custom-backward dodge jump, quick lea_south-west": [],
+      "custom-backward dodge jump, quick lea_south": [
         null,
         null,
         null,
@@ -2036,18 +1750,7 @@
         null,
         null
       ],
-      "custom-backward dodge jump, quick lea_south": [],
-      "custom-backward dodge jump, quick lea_north-east": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
+      "custom-backward dodge jump, quick lea_north-east": [],
       "custom-backward dodge jump, quick lea_east": [],
       "custom-backward dodge jump, quick lea_north-west": [
         null,
@@ -2097,8 +1800,7 @@
         null,
         null
       ],
-      "custom-death animation, character col_north-east": [],
-      "custom-death animation, character col_north": [
+      "custom-death animation, character col_north-east": [
         null,
         null,
         null,
@@ -2109,6 +1811,7 @@
         null,
         null
       ],
+      "custom-death animation, character col_north": [],
       "custom-victory animation, celebrating_north": [
         null,
         null,
@@ -2123,8 +1826,7 @@
       "custom-victory animation, celebrating_south-west": [],
       "custom-victory animation, celebrating_north-west": [],
       "custom-victory animation, celebrating_west": [],
-      "custom-victory animation, celebrating_south": [],
-      "custom-victory animation, celebrating_east": [
+      "custom-victory animation, celebrating_south": [
         null,
         null,
         null,
@@ -2135,6 +1837,7 @@
         null,
         null
       ],
+      "custom-victory animation, celebrating_east": [],
       "custom-victory animation, celebrating_south-east": [],
       "custom-victory animation, celebrating_north-east": [
         null,
@@ -2147,100 +1850,6 @@
         null,
         null
       ],
-      "custom-pixel art human base body, mal_south-west": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-pixel art human base body, mal_south": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-pixel art human base body, mal_south-east": [],
-      "custom-pixel art human base body, mal_north-west": [],
-      "custom-pixel art human base body, mal_west": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-pixel art human base body, mal_north-east": [],
-      "custom-pixel art human base body, mal_east": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-pixel art human base body, mal_north": [],
-      "custom-The character executes a sharp_west": [],
-      "custom-The character executes a sharp_north-west": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-The character executes a sharp_south-west": [],
-      "custom-The character executes a sharp_south": [],
-      "custom-The character executes a sharp_south-east": [],
-      "custom-The character executes a sharp_north": [],
-      "custom-The character executes a sharp_east": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-The character executes a sharp_north-east": [],
       "custom-The character shifts from a ne_west": [
         null,
         null,
@@ -2264,7 +1873,9 @@
         null,
         null
       ],
-      "custom-The character shifts from a ne_north": [
+      "custom-The character shifts from a ne_north": [],
+      "custom-The character shifts from a ne_south": [],
+      "custom-The character shifts from a ne_south-east": [
         null,
         null,
         null,
@@ -2275,58 +1886,8 @@
         null,
         null
       ],
-      "custom-The character shifts from a ne_south": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-The character shifts from a ne_south-east": [],
-      "custom-The character shifts from a ne_east": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-The character shifts from a ne_north-east": [],
-      "custom-The character performs a swift_north": [],
-      "custom-The character performs a swift_east": [],
-      "custom-The character performs a swift_south-east": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-The character performs a swift_south": [],
-      "custom-The character performs a swift_north-west": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "custom-The character performs a swift_west": [],
-      "custom-The character performs a swift_south-west": [],
-      "custom-The character performs a swift_north-east": [
+      "custom-The character shifts from a ne_east": [],
+      "custom-The character shifts from a ne_north-east": [
         null,
         null,
         null,
@@ -2382,7 +1943,8 @@
         null
       ],
       "custom-heavy sword swing, slow powerf_west": [],
-      "custom-heavy sword swing, slow powerf_south-east": [
+      "custom-heavy sword swing, slow powerf_south-east": [],
+      "custom-heavy sword swing, slow powerf_north": [
         null,
         null,
         null,
@@ -2392,10 +1954,9 @@
         null,
         null,
         null
-      ],
-      "custom-heavy sword swing, slow powerf_north": []
+      ]
     }
   },
   "export_version": "1.0",
-  "export_date": "2026-03-31T21:25:26.329354"
+  "export_date": "2026-03-31T23:37:06.207333"
 }
