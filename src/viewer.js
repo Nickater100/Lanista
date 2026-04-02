@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js?v=49';
-import { LayeredSpriteInspector } from './LayeredSpriteInspector.js?v=1';
+import { AssetLoader } from './AssetLoader.js?v=60';
+import { LayeredSpriteInspector } from './LayeredSpriteInspector.js?v=60';
 
 class ViewerApp {
     constructor() {
@@ -24,7 +24,11 @@ class ViewerApp {
         gridHelper.position.y = -4.5;
         this.scene.add(gridHelper);
 
-        this.assetLoader = new AssetLoader();
+        this.loaders = {
+            pelado: new AssetLoader('pelado'),
+            goblin: new AssetLoader('goblin')
+        };
+        this.currentLoader = this.loaders.pelado;
         this.inspector = null;
 
         this.init();
@@ -32,21 +36,38 @@ class ViewerApp {
     }
 
     async init() {
-        // Aprovechamos los preloads de la base principal
-        await this.assetLoader.loadMetadata();
-        await this.assetLoader.preloadEssential();
+        await Promise.all([
+            this.loaders.pelado.loadMetadata(),
+            this.loaders.goblin.loadMetadata()
+        ]);
+        await Promise.all([
+            this.loaders.pelado.preloadEssential(),
+            this.loaders.goblin.preloadEssential()
+        ]);
         
-        this.inspector = new LayeredSpriteInspector(this.scene, this.assetLoader);
+        this.inspector = new LayeredSpriteInspector(this.scene, this.currentLoader);
         this.setupUI();
         
         this.animate();
     }
 
     setupUI() {
+        const classSelect = document.getElementById('class-select');
         const dirSelect = document.getElementById('dir-select');
         const animSelect = document.getElementById('anim-select');
         const speedRange = document.getElementById('speed-range');
         const equipperBtn = document.getElementById('equipper-btn');
+
+        classSelect.addEventListener('change', (e) => {
+            this.currentLoader = this.loaders[e.target.value];
+            if (this.inspector) {
+                this.scene.remove(this.inspector.group);
+            }
+            this.inspector = new LayeredSpriteInspector(this.scene, this.currentLoader);
+            this.inspector.setDirection(dirSelect.value);
+            this.inspector.setAnimation(animSelect.value);
+            this.inspector.setSpeed(parseFloat(speedRange.value));
+        });
 
         dirSelect.addEventListener('change', (e) => {
             if (this.inspector) this.inspector.setDirection(e.target.value);

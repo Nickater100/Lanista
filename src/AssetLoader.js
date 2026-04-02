@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 
 export class AssetLoader {
-    constructor() {
+    constructor(className = 'pelado') {
+        this.className = className;
         this.textureLoader = new THREE.TextureLoader();
-        this.basePath = './Lanista-arena/personajes/pelado/';
+        this.basePath = `./Lanista-arena/personajes/${className}/`;
         this.cache = new Map();
     }
 
