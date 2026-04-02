@@ -3,12 +3,12 @@ import * as THREE from 'three';
 export class AssetLoader {
     constructor() {
         this.textureLoader = new THREE.TextureLoader();
-        this.basePath = './Lanista-arena/Personaje_base/';
+        this.basePath = './Lanista-arena/personajes/pelado/';
         this.cache = new Map();
     }
 
     async loadMetadata() {
-        const response = await fetch(`${this.basePath}metadata.json`);
+        const response = await fetch(`${this.basePath}metadata.json?v=${Date.now()}`);
         this.metadata = await response.json();
         return this.metadata;
     }
@@ -38,7 +38,7 @@ export class AssetLoader {
         }
 
         // Load running animation frames (essential for movement)
-        const running = this.metadata.frames.animations['running-4-frames'];
+        const running = this.metadata.frames.animations['run'];
         for (const dir in running) {
             running[dir].forEach(framePath => {
                 framesToLoad.push(this.loadTexture(framePath));
@@ -46,14 +46,14 @@ export class AssetLoader {
         }
 
         // Load combat frames
-        const attack = this.metadata.frames.animations['custom-fast sword slash, quick horizo'];
+        const attack = this.metadata.frames.animations['attack_fast'];
         for (const dir in attack) {
             attack[dir].forEach(framePath => {
                 framesToLoad.push(this.loadTexture(framePath));
             });
         }
 
-        const dodge = this.metadata.frames.animations['custom-backward dodge jump, quick lea'];
+        const dodge = this.metadata.frames.animations['dodge'];
         for (const dir in dodge) {
             dodge[dir].forEach(framePath => {
                 framesToLoad.push(this.loadTexture(framePath));
@@ -61,7 +61,7 @@ export class AssetLoader {
         }
 
         // Load new Death and Victory frames
-        const death = this.metadata.frames.animations['custom-death animation, character col'];
+        const death = this.metadata.frames.animations['die'];
         if (death) {
             for (const dir in death) {
                 death[dir].forEach(framePath => {
@@ -70,7 +70,7 @@ export class AssetLoader {
             }
         }
 
-        const victory = this.metadata.frames.animations['custom-victory animation, celebrating'];
+        const victory = this.metadata.frames.animations['cheer'];
         if (victory) {
             for (const dir in victory) {
                 victory[dir].forEach(framePath => {

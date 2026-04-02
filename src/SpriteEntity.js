@@ -76,22 +76,22 @@ export class SpriteEntity {
 
         switch (this.state) {
             case 'RUNNING':
-                animationKey = 'running-4-frames';
+                animationKey = 'run';
                 break;
             case 'ATTACKING':
-                animationKey = 'custom-fast sword slash, quick horizo';
+                animationKey = 'attack_fast';
                 isLooping = false;
                 break;
             case 'DODGING':
-                animationKey = 'custom-backward dodge jump, quick lea';
+                animationKey = 'dodge';
                 isLooping = false;
                 break;
             case 'DYING':
-                animationKey = 'custom-death animation, character col';
+                animationKey = 'die';
                 isLooping = false;
                 break;
             case 'VICTORY':
-                animationKey = 'custom-victory animation, celebrating';
+                animationKey = 'cheer';
                 isLooping = true;
                 break;
             default:
@@ -134,11 +134,11 @@ export class SpriteEntity {
         if (this.state === 'IDLE') {
             texturePath = rotations[this.direction];
         } else {
-            const animationKey = this.state === 'RUNNING' ? 'running-4-frames' :
-                                 this.state === 'ATTACKING' ? 'custom-fast sword slash, quick horizo' :
-                                 this.state === 'DYING' ? 'custom-death animation, character col' :
-                                 this.state === 'VICTORY' ? 'custom-victory animation, celebrating' :
-                                 'custom-backward dodge jump, quick lea';
+            const animationKey = this.state === 'RUNNING' ? 'run' :
+                                 this.state === 'ATTACKING' ? 'attack_fast' :
+                                 this.state === 'DYING' ? 'die' :
+                                 this.state === 'VICTORY' ? 'cheer' :
+                                 'dodge';
             
             const dirFrames = animations[animationKey][this.direction];
             if (dirFrames) {
