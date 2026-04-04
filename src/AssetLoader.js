@@ -38,56 +38,19 @@ export class AssetLoader {
             framesToLoad.push(this.loadTexture(this.metadata.frames.rotations[direction]));
         }
 
-        // Load running animation frames (essential for movement)
-        const running = this.metadata.frames.animations['run'];
-        if (running) {
-            for (const dir in running) {
-                running[dir].forEach(framePath => {
-                    framesToLoad.push(this.loadTexture(framePath));
-                });
-            }
-        }
-
-        // Load combat frames
-        const attack = this.metadata.frames.animations['attack_fast'];
-        if (attack) {
-            for (const dir in attack) {
-                attack[dir].forEach(framePath => {
-                    framesToLoad.push(this.loadTexture(framePath));
-                });
-            }
-        }
-
-        const dodge = this.metadata.frames.animations['dodge'];
-        if (dodge) {
-            for (const dir in dodge) {
-                dodge[dir].forEach(framePath => {
-                    framesToLoad.push(this.loadTexture(framePath));
-                });
-            }
-        }
-
-        // Load new Death and Victory frames
-        const die = this.metadata.frames.animations['die'];
-        if (die) {
-            for (const dir in die) {
-                die[dir].forEach(framePath => {
-                    framesToLoad.push(this.loadTexture(framePath));
-                });
-            }
-        }
-
-        const cheer = this.metadata.frames.animations['cheer'];
-        if (cheer) {
-            for (const dir in cheer) {
-                cheer[dir].forEach(framePath => {
+        // Load ALL animation frames dynamically from metadata
+        const animations = this.metadata.frames.animations;
+        for (const animKey in animations) {
+            const animGroup = animations[animKey];
+            for (const dir in animGroup) {
+                animGroup[dir].forEach(framePath => {
                     framesToLoad.push(this.loadTexture(framePath));
                 });
             }
         }
 
         await Promise.all(framesToLoad);
-        console.log(`Preloaded ${this.cache.size} textures.`);
+        console.log(`Preloaded ${this.cache.size} textures for ${this.className}.`);
     }
 
     getTexture(path) {

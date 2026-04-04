@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js?v=70';
+import { AssetLoader } from './AssetLoader.js?v=71';
 import { LayeredSpriteInspector } from './LayeredSpriteInspector.js?v=70';
 
 class ViewerApp {

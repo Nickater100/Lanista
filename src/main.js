@@ -1,11 +1,11 @@
 import * as THREE from 'three';
-import { UnitDatabase } from './UnitDatabase.js?v=70';
-import { AssetLoader } from './AssetLoader.js?v=70';
-import { SpriteEntity } from './SpriteEntity.js?v=70';
+import { UnitDatabase } from './UnitDatabase.js?v=71';
+import { AssetLoader } from './AssetLoader.js?v=71';
+import { SpriteEntity } from './SpriteEntity.js?v=71';
 import { AudioManager } from './AudioManager.js?v=70';
 import { UIManager } from './UIManager.js?v=70';
 import { EnvironmentManager } from './EnvironmentManager.js?v=70';
-import { CombatSystem } from './CombatSystem.js?v=70';
+import { CombatSystem } from './CombatSystem.js?v=72';
 
 console.log('Lanista Arena v58 - Booting (Multi-Gladiator Systems)...');
 console.log('DEBUG: Script loaded at ' + new Date().toISOString());
