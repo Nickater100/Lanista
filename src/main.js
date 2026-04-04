@@ -1,10 +1,11 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js?v=62';
-import { SpriteEntity } from './SpriteEntity.js?v=62';
-import { AudioManager } from './AudioManager.js?v=62';
-import { UIManager } from './UIManager.js?v=62';
-import { EnvironmentManager } from './EnvironmentManager.js?v=62';
-import { CombatSystem } from './CombatSystem.js?v=62';
+import { UnitDatabase } from './UnitDatabase.js?v=70';
+import { AssetLoader } from './AssetLoader.js?v=70';
+import { SpriteEntity } from './SpriteEntity.js?v=70';
+import { AudioManager } from './AudioManager.js?v=70';
+import { UIManager } from './UIManager.js?v=70';
+import { EnvironmentManager } from './EnvironmentManager.js?v=70';
+import { CombatSystem } from './CombatSystem.js?v=70';
 
 console.log('Lanista Arena v58 - Booting (Multi-Gladiator Systems)...');
 console.log('DEBUG: Script loaded at ' + new Date().toISOString());
@@ -28,7 +29,7 @@ class ArenaGame {
         // Modules
         this.uiManager = new UIManager();
         this.envManager = new EnvironmentManager(this.scene);
-        this.combatSystem = new CombatSystem(this.scene, this.envManager);
+        this.combatSystem = new CombatSystem(this.scene, this.envManager, this.camera);
 
         // Setup Scene
         this.envManager.setupEnvironment();
@@ -144,6 +145,8 @@ class ArenaGame {
         }
 
         if (!this.isRunning) return;
+
+        this.combatSystem.updateGlobal(dt);
 
         this.entities.forEach(gladiator => {
             gladiator.update(dt);

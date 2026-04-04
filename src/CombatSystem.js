@@ -1,9 +1,12 @@
 import * as THREE from 'three';
+import { Projectile } from './Projectile.js?v=62';
 
 export class CombatSystem {
-    constructor(scene, envManager) {
+    constructor(scene, envManager, camera) {
         this.scene = scene;
         this.envManager = envManager;
+        this.camera = camera;
+        this.projectiles = [];
     }
 
     findTarget(gladiator, entities) {
@@ -42,6 +45,26 @@ export class CombatSystem {
         this.scene.add(blood);
     }
 
+    updateGlobal(dt) {
+        // Update projectiles
+        for (let i = this.projectiles.length - 1; i >= 0; i--) {
+            const p = this.projectiles[i];
+            p.camera = this.camera; 
+            p.update(dt, (target, damage) => {
+                if (target.state === 'DODGING') {
+                    console.log('DODGED PROJECTILE!');
+                } else {
+                    target.takeDamage(damage);
+                    this.spawnBlood(target.position);
+                    console.log(`Spell hit ${target.name} for ${damage}`);
+                }
+            });
+            if (p.hasHit) {
+                this.projectiles.splice(i, 1);
+            }
+        }
+    }
+
     updateAI(gladiator, entities, dt) {
         if (gladiator.isDying || gladiator.state === 'VICTORY') return;
         
@@ -54,19 +77,25 @@ export class CombatSystem {
 
         const dist = gladiator.position.distanceTo(opponent.position);
         const dir = new THREE.Vector3().subVectors(opponent.position, gladiator.position).normalize();
-        const attackRange = 5.0; 
-        const approachRange = 60.0;
+        const attackRange = gladiator.attackRange || 5.0; 
 
-        // Hit Detection Logic
+        // Hit Detection Logic Layer
         if (gladiator.state === 'ATTACKING' && (gladiator.frameIndex === 4 || gladiator.frameIndex === 5)) {
-            if (!gladiator.hasDealtDamage && dist <= attackRange) {
-                if (opponent.state === 'DODGING') {
-                    console.log('DODGED!');
-                } else {
+            if (!gladiator.hasDealtDamage) {
+                if (gladiator.combatType === 'ranged') {
                     const dmg = gladiator.strength + Math.floor(Math.random() * 5);
-                    opponent.takeDamage(dmg);
-                    this.spawnBlood(opponent.position);
-                    console.log(`${gladiator.name} hit ${opponent.name} for ${dmg}`);
+                    const p = new Projectile(this.scene, gladiator, opponent, dmg);
+                    this.projectiles.push(p);
+                    console.log(`${gladiator.name} casted a spell!`);
+                } else if (dist <= attackRange + 2.0) { // Slight hit leniency
+                    if (opponent.state === 'DODGING') {
+                        console.log('DODGED!');
+                    } else {
+                        const dmg = gladiator.strength + Math.floor(Math.random() * 5);
+                        opponent.takeDamage(dmg);
+                        this.spawnBlood(opponent.position);
+                        console.log(`${gladiator.name} hit ${opponent.name} for ${dmg}`);
+                    }
                 }
                 gladiator.hasDealtDamage = true;
             }
@@ -74,28 +103,37 @@ export class CombatSystem {
 
         if (gladiator.state === 'ATTACKING' || gladiator.state === 'DODGING') return;
 
-        if (dist > approachRange) {
+        if (dist > attackRange * 1.5) { // Run towards enemy if out of range widely
             gladiator.state = 'RUNNING';
             gladiator.velocity.copy(dir);
             gladiator.setDirectionFromVector(dir);
-        } else if (dist <= approachRange && dist > attackRange) {
+        } else if (dist > attackRange && dist <= attackRange * 1.5) { 
+            // In the approach zone
             gladiator.state = 'RUNNING';
             gladiator.velocity.copy(dir);
             gladiator.setDirectionFromVector(dir);
 
-            if (opponent.state === 'ATTACKING' && Math.random() < 0.01) {
+            if (opponent.state === 'ATTACKING' && Math.random() < (gladiator.agility / 100)) {
                 gladiator.dodge();
             }
         } else {
-            gladiator.velocity.set(0, 0, 0);
+            // In attack range
+            gladiator.velocity.set(0, 0, 0); // Stop moving
             gladiator.setDirectionFromVector(dir);
 
-            if (opponent.state === 'ATTACKING' && Math.random() < 0.02) {
+            if (opponent.state === 'ATTACKING' && Math.random() < ((gladiator.agility/2) / 100)) {
                 gladiator.dodge();
             } else if (gladiator.attackCooldown <= 0) {
                 gladiator.attack();
             } else {
-                gladiator.state = 'IDLE';
+                // If waiting for cooldown, ranged could kite, but melee waits.
+                if (gladiator.combatType === 'ranged' && dist < attackRange * 0.5) {
+                    // Kiting (moving back)
+                    gladiator.state = 'RUNNING';
+                    gladiator.velocity.copy(dir.clone().negate());
+                } else {
+                    gladiator.state = 'IDLE';
+                }
             }
         }
     }

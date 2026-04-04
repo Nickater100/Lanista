@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { UnitDatabase } from './UnitDatabase.js?v=1';
 
 export class SpriteEntity {
     constructor(assetLoader, scene, audioManager, name = 'Gladiator', teamId = 0) {
@@ -26,12 +27,20 @@ export class SpriteEntity {
         this.speed = 5.0; // Faster for less wait time
         this.isFlipped = false;
         
-        // Stats
-        this.maxHealth = 100;
-        this.health = 100;
-        this.strength = 15;
-        this.agility = 10; // % chance to auto-dodge
-        this.hasDealtDamage = false; // To prevent multi-hits in one swing
+        this.className = assetLoader.className;
+        const stats = UnitDatabase[this.className] || UnitDatabase['pelado'];
+
+        // Stats from UnitDatabase
+        this.maxHealth = stats.maxHealth;
+        this.health = stats.maxHealth;
+        this.strength = stats.damage;
+        this.agility = stats.agility; 
+        this.speed = stats.speed;
+        this.attackRange = stats.attackRange;
+        this.baseCooldown = stats.attackCooldown;
+        this.combatType = stats.type; // 'melee' or 'ranged'
+
+        this.hasDealtDamage = false; 
         this.isDying = false;
 
         // Visuals
