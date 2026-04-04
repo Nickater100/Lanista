@@ -10,23 +10,23 @@ export class SpriteEntity {
         this.metadata = assetLoader.metadata;
         this.name = name;
         this.teamId = teamId;
-        
+
         // State
         this.state = 'IDLE'; // IDLE, RUNNING, ATTACKING, DODGING, DYING, VICTORY, SKILL_LV4, SKILL_LV8, SKILL_LV12
         this.direction = 'south';
         this.frameIndex = 0;
         this.frameTimer = 0;
         this.frameDuration = 0.08;
-        
+
         // Cooldowns (in seconds)
         this.attackCooldown = 0;
         this.dodgeCooldown = 0;
-        
+
         // Transform
         this.position = new THREE.Vector3(0, 0, 0);
         this.velocity = new THREE.Vector3(0, 0, 0);
         this.isFlipped = false;
-        
+
         this.className = assetLoader.className;
         const stats = UnitDatabase[this.className] || UnitDatabase['pelado'];
 
@@ -44,7 +44,7 @@ export class SpriteEntity {
         this.baseAttackCooldown = stats.attackCooldown;
         this.combatType = stats.type;
 
-        this.hasDealtDamage = false; 
+        this.hasDealtDamage = false;
         this.isDying = false;
 
         // === SKILL SYSTEM ===
@@ -52,7 +52,7 @@ export class SpriteEntity {
         this.skills = stats.skills || {};
         this.skillCooldowns = {};
         this.skillTriggered = {}; // Track if skill effect was triggered this cast
-        
+
         // Inicializar cooldowns de skills en 0
         for (const key in this.skills) {
             this.skillCooldowns[key] = 0;
@@ -66,12 +66,12 @@ export class SpriteEntity {
         this.isDecoy = false; // Si es true, es un señuelo (no un gladiador real)
 
         // Visuals
-        this.sprite = new THREE.Sprite(new THREE.SpriteMaterial({ 
-            transparent: true, 
+        this.sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+            transparent: true,
             alphaTest: 0.5,
             depthWrite: false
         }));
-        this.sprite.scale.set(5.6, 5.6, 1); 
+        this.sprite.scale.set(5.6, 5.6, 1);
         this.scene.add(this.sprite);
 
         this.updateTexture();
@@ -156,10 +156,10 @@ export class SpriteEntity {
         // Simple Physics
         this.position.addScaledVector(this.velocity, dt * this.speed);
         this.sprite.position.copy(this.position);
-        
+
         // Depth sorting
         this.sprite.renderOrder = Math.floor((100 - this.position.z) * 10);
-        
+
         // Animation Loop
         this.frameTimer += dt;
         if (this.frameTimer >= this.frameDuration) {
@@ -243,7 +243,7 @@ export class SpriteEntity {
         if (animationKey) {
             const animGroup = animations[animationKey];
             const frames = animGroup ? animGroup[this.direction] : null;
-            
+
             if (frames) {
                 this.frameIndex++;
                 if (this.frameIndex >= frames.length) {
@@ -251,6 +251,9 @@ export class SpriteEntity {
                         this.frameIndex = 0;
                     } else if (this.state === 'DYING') {
                         this.frameIndex = frames.length - 1;
+                    } else if (this.state === 'SKILL_LV12') {
+                        // Lv12: loopear desde frame 4 hasta el final mientras dure el efecto
+                        this.frameIndex = 4;
                     } else {
                         this.state = 'IDLE';
                         this.frameIndex = 0;
@@ -278,14 +281,14 @@ export class SpriteEntity {
             texturePath = rotations[this.direction];
         } else {
             const animationKey = this.state === 'RUNNING' ? 'run' :
-                                 this.state === 'ATTACKING' ? 'attack_fast' :
-                                 this.state === 'DYING' ? 'die' :
-                                 this.state === 'VICTORY' ? 'cheer' :
-                                 this.state === 'SKILL_LV4' ? 'lv4' :
-                                 this.state === 'SKILL_LV8' ? 'lv8' :
-                                 this.state === 'SKILL_LV12' ? 'lv12' :
-                                 'dodge';
-            
+                this.state === 'ATTACKING' ? 'attack_fast' :
+                    this.state === 'DYING' ? 'die' :
+                        this.state === 'VICTORY' ? 'cheer' :
+                            this.state === 'SKILL_LV4' ? 'lv4' :
+                                this.state === 'SKILL_LV8' ? 'lv8' :
+                                    this.state === 'SKILL_LV12' ? 'lv12' :
+                                        'dodge';
+
             if (animations[animationKey] && animations[animationKey][this.direction]) {
                 texturePath = animations[animationKey][this.direction][this.frameIndex];
             } else {
@@ -305,12 +308,12 @@ export class SpriteEntity {
     setDirectionFromVector(vec) {
         if (vec.lengthSq() < 0.001) return;
 
-        const angle = Math.atan2(vec.x, vec.z); 
+        const angle = Math.atan2(vec.x, vec.z);
         const sector = Math.round(8 * angle / (2 * Math.PI) + 8) % 8;
-        
+
         const directions = ['south', 'south-east', 'east', 'north-east', 'north', 'north-west', 'west', 'south-west'];
         this.direction = directions[sector];
-        
+
         if (this.state === 'IDLE') {
             this.updateTexture();
         }
@@ -320,13 +323,13 @@ export class SpriteEntity {
         if (this.state === 'ATTACKING' || this.state === 'DODGING' || this.attackCooldown > 0 || this.isDying) return;
         if (this.state.startsWith('SKILL_')) return; // No atacar mientras usa skill
         if (StatusEffectSystem.has(this, 'CHARMED_ULTIMATE')) return; // No puede atacar bajo charm
-        
+
         this.state = 'ATTACKING';
         this.frameIndex = 0;
         this.frameTimer = 0;
         this.attackCooldown = this.baseCooldown;
         this.hasDealtDamage = false;
-        
+
         if (this.audioManager) this.audioManager.play('slash', 0.3);
     }
 
@@ -334,7 +337,7 @@ export class SpriteEntity {
         if (this.state === 'ATTACKING' || this.state === 'DODGING' || this.dodgeCooldown > 0 || this.isDying) return;
         if (this.state.startsWith('SKILL_')) return;
         if (StatusEffectSystem.has(this, 'CHARMED_ULTIMATE')) return;
-        
+
         this.state = 'DODGING';
         this.frameIndex = 0;
         this.frameTimer = 0;
@@ -351,10 +354,10 @@ export class SpriteEntity {
 
     takeDamage(amount) {
         if (this.isDying) return;
-        
+
         this.health -= amount;
         this.flashRed();
-        
+
         if (this.audioManager) this.audioManager.play('hit', 0.5);
 
         if (this.health <= 0) {
@@ -394,14 +397,14 @@ export class SpriteEntity {
     die() {
         if (this.isDying) return;
         this.isDying = true;
-        this.state = 'DYING'; 
+        this.state = 'DYING';
         this.frameIndex = 0;
         this.frameTimer = 0;
         this.velocity.set(0, 0, 0);
 
         // Limpiar todos los efectos al morir
         StatusEffectSystem.clearAll(this);
-        
+
         if (this.audioManager) {
             this.audioManager.play('death', 0.6);
             this.audioManager.playVictory();

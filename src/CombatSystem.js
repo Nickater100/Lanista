@@ -325,6 +325,38 @@ export class CombatSystem {
             StatusEffectSystem.apply(target, charmEffect);
         });
 
+        // Mantener a la caster en estado de channeling durante la duración del efecto
+        const channelingEffect = new StatusEffect({
+            type: 'CHANNELING_ULTIMATE',
+            duration: skill.effect.duration,
+            source: caster,
+            params: { ringTimer: 0 },
+            onApply: (t) => {
+                t.velocity.set(0, 0, 0);
+            },
+            onTick: (t, dt) => {
+                // Mantener inmóvil y en estado de skill durante el channeling
+                t.velocity.set(0, 0, 0);
+                if (t.state !== 'SKILL_LV12' && t.state !== 'DYING') {
+                    t.state = 'SKILL_LV12';
+                }
+                // Repetir onda expansiva cada 1.5 segundos
+                channelingEffect.params.ringTimer += dt;
+                if (channelingEffect.params.ringTimer >= 1.5) {
+                    channelingEffect.params.ringTimer = 0;
+                    this.spawnAOERing(t.position, skill.range);
+                }
+            },
+            onExpire: (t) => {
+                console.log(`🔥 ${t.name} terminó de canalizar Dominio del Deseo`);
+                if (t.state === 'SKILL_LV12') {
+                    t.state = 'IDLE';
+                    t.frameIndex = 0;
+                }
+            }
+        });
+        StatusEffectSystem.apply(caster, channelingEffect);
+
         console.log(`🔥 ${caster.name} usó Dominio del Deseo! ${targets.length} enemigos afectados`);
     }
 

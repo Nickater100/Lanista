@@ -1,11 +1,11 @@
 import * as THREE from 'three';
 import { UnitDatabase } from './UnitDatabase.js?v=71';
 import { AssetLoader } from './AssetLoader.js?v=71';
-import { SpriteEntity } from './SpriteEntity.js?v=71';
+import { SpriteEntity } from './SpriteEntity.js?v=72';
 import { AudioManager } from './AudioManager.js?v=70';
 import { UIManager } from './UIManager.js?v=70';
 import { EnvironmentManager } from './EnvironmentManager.js?v=70';
-import { CombatSystem } from './CombatSystem.js?v=72';
+import { CombatSystem } from './CombatSystem.js?v=74';
 
 console.log('Lanista Arena v58 - Booting (Multi-Gladiator Systems)...');
 console.log('DEBUG: Script loaded at ' + new Date().toISOString());
@@ -25,7 +25,7 @@ class ArenaGame {
         this.camera.lookAt(0, 0, 0);
 
         this.scene = new THREE.Scene();
-        
+
         // Modules
         this.uiManager = new UIManager();
         this.envManager = new EnvironmentManager(this.scene);
@@ -45,8 +45,8 @@ class ArenaGame {
         this.combatMode = 'VS';
 
         this.gladiatorNames = [
-            'Spartacus', 'Crixus', 'Gannicus', 'Agron', 'Oenomaus', 
-            'Marcus', 'Flamma', 'Verus', 'Priscus', 'Spiculus', 
+            'Spartacus', 'Crixus', 'Gannicus', 'Agron', 'Oenomaus',
+            'Marcus', 'Flamma', 'Verus', 'Priscus', 'Spiculus',
             'Carpophorus', 'Hermes', 'Tetraites', 'Dama', 'Scaeva',
             'Batiatus', 'Varro', 'Ilithyia', 'Glaber', 'Ashur'
         ];
@@ -58,7 +58,7 @@ class ArenaGame {
         });
 
         this.init();
-        
+
         window.addEventListener('resize', () => this.onResize());
     }
 
@@ -80,7 +80,7 @@ class ArenaGame {
         this.combatMode = ffa ? 'FFA' : 'VS';
         this.entities.forEach(e => e.destroy());
         this.entities = [];
-        
+
         this.uiManager.clearHealthBars();
 
         if (ffa) {
@@ -124,7 +124,7 @@ class ArenaGame {
         const lookTarget = new THREE.Vector3(0, 0, 0);
         gladiator.setDirectionFromVector(lookTarget.sub(gladiator.position).normalize());
         this.entities.push(gladiator);
-        
+
         this.uiManager.createHealthBar(gladiator, this.combatMode);
     }
 
