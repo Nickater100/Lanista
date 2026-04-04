@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js?v=60';
-import { LayeredSpriteInspector } from './LayeredSpriteInspector.js?v=60';
+import { AssetLoader } from './AssetLoader.js?v=62';
+import { LayeredSpriteInspector } from './LayeredSpriteInspector.js?v=62';
 
 class ViewerApp {
     constructor() {
@@ -26,7 +26,8 @@ class ViewerApp {
 
         this.loaders = {
             pelado: new AssetLoader('pelado'),
-            goblin: new AssetLoader('goblin')
+            goblin: new AssetLoader('goblin'),
+            succubus: new AssetLoader('succubus')
         };
         this.currentLoader = this.loaders.pelado;
         this.inspector = null;
@@ -38,11 +39,13 @@ class ViewerApp {
     async init() {
         await Promise.all([
             this.loaders.pelado.loadMetadata(),
-            this.loaders.goblin.loadMetadata()
+            this.loaders.goblin.loadMetadata(),
+            this.loaders.succubus.loadMetadata()
         ]);
         await Promise.all([
             this.loaders.pelado.preloadEssential(),
-            this.loaders.goblin.preloadEssential()
+            this.loaders.goblin.preloadEssential(),
+            this.loaders.succubus.preloadEssential()
         ]);
         
         this.inspector = new LayeredSpriteInspector(this.scene, this.currentLoader);

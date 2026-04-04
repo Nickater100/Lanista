@@ -1,10 +1,10 @@
 import * as THREE from 'three';
-import { AssetLoader } from './AssetLoader.js?v=60';
-import { SpriteEntity } from './SpriteEntity.js?v=60';
-import { AudioManager } from './AudioManager.js?v=60';
-import { UIManager } from './UIManager.js?v=60';
-import { EnvironmentManager } from './EnvironmentManager.js?v=60';
-import { CombatSystem } from './CombatSystem.js?v=60';
+import { AssetLoader } from './AssetLoader.js?v=62';
+import { SpriteEntity } from './SpriteEntity.js?v=62';
+import { AudioManager } from './AudioManager.js?v=62';
+import { UIManager } from './UIManager.js?v=62';
+import { EnvironmentManager } from './EnvironmentManager.js?v=62';
+import { CombatSystem } from './CombatSystem.js?v=62';
 
 console.log('Lanista Arena v58 - Booting (Multi-Gladiator Systems)...');
 console.log('DEBUG: Script loaded at ' + new Date().toISOString());
@@ -35,7 +35,8 @@ class ArenaGame {
 
         this.loaders = {
             pelado: new AssetLoader('pelado'),
-            goblin: new AssetLoader('goblin')
+            goblin: new AssetLoader('goblin'),
+            succubus: new AssetLoader('succubus')
         };
         this.audioManager = new AudioManager(this.camera);
         this.entities = [];
@@ -63,11 +64,13 @@ class ArenaGame {
     async init() {
         await Promise.all([
             this.loaders.pelado.loadMetadata(),
-            this.loaders.goblin.loadMetadata()
+            this.loaders.goblin.loadMetadata(),
+            this.loaders.succubus.loadMetadata()
         ]);
         await Promise.all([
             this.loaders.pelado.preloadEssential(),
-            this.loaders.goblin.preloadEssential()
+            this.loaders.goblin.preloadEssential(),
+            this.loaders.succubus.preloadEssential()
         ]);
         this.animate();
     }
@@ -87,7 +90,8 @@ class ArenaGame {
                 const x = Math.cos(angle) * r;
                 const z = Math.sin(angle) * r;
                 const name = this.gladiatorNames[i % this.gladiatorNames.length];
-                const className = Math.random() > 0.5 ? 'goblin' : 'pelado';
+                const classes = ['pelado', 'goblin', 'succubus'];
+                const className = classes[Math.floor(Math.random() * classes.length)];
                 this.createGladiator(x, z, name, i + 10, className); // Unique teamId per gladiator in FFA
             }
         } else {
@@ -96,7 +100,8 @@ class ArenaGame {
                 const x = -25;
                 const z = (i - (t1 - 1) / 2) * 8;
                 const name = this.gladiatorNames[Math.floor(Math.random() * 8)];
-                const className = Math.random() > 0.5 ? 'goblin' : 'pelado';
+                const classes = ['pelado', 'goblin', 'succubus'];
+                const className = classes[Math.floor(Math.random() * classes.length)];
                 this.createGladiator(x, z, name, 1, className);
             }
             // Spawn Team 2
@@ -104,7 +109,8 @@ class ArenaGame {
                 const x = 25;
                 const z = (i - (t2 - 1) / 2) * 8;
                 const name = this.gladiatorNames[Math.floor(Math.random() * 8) + 8];
-                const className = Math.random() > 0.5 ? 'goblin' : 'pelado';
+                const classes = ['pelado', 'goblin', 'succubus'];
+                const className = classes[Math.floor(Math.random() * classes.length)];
                 this.createGladiator(x, z, name, 2, className);
             }
         }

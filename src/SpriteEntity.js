@@ -101,7 +101,9 @@ export class SpriteEntity {
         }
 
         if (animationKey) {
-            const frames = animations[animationKey][this.direction];
+            const animGroup = animations[animationKey];
+            const frames = animGroup ? animGroup[this.direction] : null;
+            
             if (frames) {
                 this.frameIndex++;
                 if (this.frameIndex >= frames.length) {
@@ -117,6 +119,11 @@ export class SpriteEntity {
                         this.hasDealtDamage = false; // Reset for next attack
                     }
                 }
+            } else {
+                // Graceful fallback if the animation doesn't exist (like succubus missing 'dodge')
+                this.state = 'IDLE';
+                this.frameIndex = 0;
+                this.hasDealtDamage = false;
             }
         } else {
             // IDLE: static frame
@@ -140,12 +147,10 @@ export class SpriteEntity {
                                  this.state === 'VICTORY' ? 'cheer' :
                                  'dodge';
             
-            const dirFrames = animations[animationKey][this.direction];
-            if (dirFrames) {
-                texturePath = dirFrames[this.frameIndex];
+            if (animations[animationKey] && animations[animationKey][this.direction]) {
+                texturePath = animations[animationKey][this.direction][this.frameIndex];
             } else {
-                // Fallback to idle if animation direction is missing
-                texturePath = rotations[this.direction];
+                texturePath = rotations[this.direction]; // Fallback
             }
         }
 

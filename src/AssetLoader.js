@@ -40,41 +40,47 @@ export class AssetLoader {
 
         // Load running animation frames (essential for movement)
         const running = this.metadata.frames.animations['run'];
-        for (const dir in running) {
-            running[dir].forEach(framePath => {
-                framesToLoad.push(this.loadTexture(framePath));
-            });
-        }
-
-        // Load combat frames
-        const attack = this.metadata.frames.animations['attack_fast'];
-        for (const dir in attack) {
-            attack[dir].forEach(framePath => {
-                framesToLoad.push(this.loadTexture(framePath));
-            });
-        }
-
-        const dodge = this.metadata.frames.animations['dodge'];
-        for (const dir in dodge) {
-            dodge[dir].forEach(framePath => {
-                framesToLoad.push(this.loadTexture(framePath));
-            });
-        }
-
-        // Load new Death and Victory frames
-        const death = this.metadata.frames.animations['die'];
-        if (death) {
-            for (const dir in death) {
-                death[dir].forEach(framePath => {
+        if (running) {
+            for (const dir in running) {
+                running[dir].forEach(framePath => {
                     framesToLoad.push(this.loadTexture(framePath));
                 });
             }
         }
 
-        const victory = this.metadata.frames.animations['cheer'];
-        if (victory) {
-            for (const dir in victory) {
-                victory[dir].forEach(framePath => {
+        // Load combat frames
+        const attack = this.metadata.frames.animations['attack_fast'];
+        if (attack) {
+            for (const dir in attack) {
+                attack[dir].forEach(framePath => {
+                    framesToLoad.push(this.loadTexture(framePath));
+                });
+            }
+        }
+
+        const dodge = this.metadata.frames.animations['dodge'];
+        if (dodge) {
+            for (const dir in dodge) {
+                dodge[dir].forEach(framePath => {
+                    framesToLoad.push(this.loadTexture(framePath));
+                });
+            }
+        }
+
+        // Load new Death and Victory frames
+        const die = this.metadata.frames.animations['die'];
+        if (die) {
+            for (const dir in die) {
+                die[dir].forEach(framePath => {
+                    framesToLoad.push(this.loadTexture(framePath));
+                });
+            }
+        }
+
+        const cheer = this.metadata.frames.animations['cheer'];
+        if (cheer) {
+            for (const dir in cheer) {
+                cheer[dir].forEach(framePath => {
                     framesToLoad.push(this.loadTexture(framePath));
                 });
             }
